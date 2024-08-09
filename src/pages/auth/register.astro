@@ -1,0 +1,38 @@
+---
+// import Layout from '../layouts/Layout.astro';
+---
+
+<main>
+  <div class="container-form">
+    <form class="sign-up">
+      <h2>Registrarse</h2>
+      <span>Use su correo electronico para registrarse</span>
+      <div class="container-input">
+        <ion-icon name="people-circle-outline"></ion-icon>
+        <input type="text" placeholder="Nombre del club" />
+      </div>
+      <div class="container-input">
+        <ion-icon name="mail-outline"></ion-icon>
+        <input type="text" placeholder="Email" />
+      </div>
+
+      <div class="container-input">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <input type="password" placeholder="password" />
+      </div>
+      <div class="container-input">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <input type="password" placeholder="password" />
+      </div>
+      <button class="button"></button>REGISTRARSE
+    </form>
+  </div>
+</main>
+
+<style>
+  main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>
