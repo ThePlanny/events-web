@@ -1,33 +1,22 @@
----
-import Layout from "../../layouts/Layout.astro";
----
+<main>
+  <div class="container-form">
+    <form class="sign-up" id="signUpForm">
+      <h2>Inicia sesion</h2>
 
-<Layout title="Evntos planny">
-  <main>
-    <div class="container-form">
-      <form class="sign-up" id="signUpForm">
-        <h2>Inicia sesion</h2>
+      <div class="container-input">
+        <input type="email" placeholder="Email" id="email" required />
+        <span class="error-message" id="emailError"></span>
+      </div>
 
-        <div class="container-input">
-          <input type="email" placeholder="Email" id="email" required />
-          <span class="error-message" id="emailError"></span>
-        </div>
+      <div class="container-input">
+        <input type="password" placeholder="Password" id="password" required />
+        <span class="error-message" id="passwordError"></span>
+      </div>
 
-        <div class="container-input">
-          <input
-            type="password"
-            placeholder="Password"
-            id="password"
-            required
-          />
-          <span class="error-message" id="passwordError"></span>
-        </div>
-
-        <button class="button" type="submit">INICIA SESION</button>
-      </form>
-    </div>
-  </main>
-</Layout>
+      <button class="button" type="submit">INICIA SESION</button>
+    </form>
+  </div>
+</main>
 
 <script>
   import { auth } from "../../utils/firebase";
