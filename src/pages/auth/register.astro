@@ -142,139 +142,124 @@
   @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
   }
+
   body {
-    width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(170, 167, 167);
-  }
-  .container-form {
-    width: 800px;
-    height: 600px;
-    position: relative;
-    background-color: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgb(0, 0, 0, 0.3);
-    background-color: white;
+    min-height: 100vh;
+    background-color: #f0f0f0;
   }
 
-  .container-form form {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s ease-in;
+  .container-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-  .container-form h2 {
-    font-size: 30px;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  span {
+    display: block;
+    font-size: 0.875rem;
+    color: #777;
+    text-align: center;
     margin-bottom: 20px;
   }
-  .container-form span {
-    font-size: 12px;
+
+  .container-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    padding: 10px;
     margin-bottom: 15px;
   }
-  .container-input {
-    width: 300px;
-    height: 40px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 0 15px;
-    background-color: #eeeeee;
+
+  .container-input ion-icon {
+    color: #999;
+    font-size: 1.2rem;
   }
+
   .container-input input {
-    border: none;
-    outline: none;
     width: 100%;
-    height: 100%;
-    background-color: inherit;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
   }
-  .container-form a {
-    color: black;
-    font-size: 14px;
-    margin-bottom: 20px;
-    margin-top: 5px;
+
+  .container-input input::placeholder {
+    color: #aaa;
   }
+
   .button {
-    width: 170px;
-    height: 45px;
-    font-size: 15px;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #e63946;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-    background-color: rgb(216, 93, 93);
-    color: white;
-  }
-  /*Animation form*/
-
-  .sing-up {
-    transform: translateX(-100%);
-  }
-  .container.toggle .sing-in {
-    transform: translateX(100%);
-  }
-  .container.toggle .sing-up {
-    transform: translateX(0);
+    text-transform: uppercase;
+    transition: background-color 0.3s;
   }
 
-  /*Welcome*/
-  .container-welcome {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    transform: translateX(100%);
-    background-color: rgb(235, 53, 53);
-    transition:
-      transform 0.5s ease-in-out,
-      border-radius 0.5s ease-in-out;
-    overflow: hidden;
-    border-radius: 50% 0 0 50%;
-  }
-  .container.toggle .container-welcome {
-    transform: translateX(0);
-    border-radius: 0 50% 50% 0;
-    background-color: rgb(151, 151, 151);
-  }
-  .container-welcome .welcome {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 0 50px;
-    color: white;
-    transition: transform 0.5s ease-in-out;
-  }
-  .welcome-sign-in {
-    transform: translateX(100%);
-  }
-  .container-welcome h3 {
-    font-size: 40px;
-  }
-  .container-welcome p {
-    font-size: 14px;
-    text-align: center;
-  }
-  .container-welcome .button {
-    border: 2px solid white;
-    background-color: transparent;
+  .button:hover {
+    background-color: #d62828;
   }
 
-  .container.toggle .welcome-sign-in {
-    transform: translateX(0);
+  .error-message {
+    font-size: 0.75rem;
+    color: #e63946;
+    margin-top: 5px;
   }
-  .container.toggle .welcome-sign-up {
-    transform: translateX(-100%);
+
+  @media (min-width: 768px) {
+    .container-form {
+      max-width: 500px;
+      padding: 40px;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .button {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container-form {
+      padding: 15px;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    .button {
+      font-size: 0.875rem;
+    }
   }
 </style>
