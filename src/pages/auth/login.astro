@@ -1,220 +1,221 @@
-
 <main>
-    <div class="container-form">
-      <form class="sign-up" id="signUpForm">
-        <h2>Inicia sesion</h2>
-       
-        <div class="container-input">
-          <input type="email" placeholder="Email" id="email" required />
-          <span class="error-message" id="emailError"></span>
-        </div>
-  
-        <div class="container-input">
-          <input type="password" placeholder="Password" id="password" required />
-          <span class="error-message" id="passwordError"></span>
-        </div>
-        
-        <button class="button" type="submit">INICIA SESION</button>
-      </form>
-    </div>
-  </main>
-  
-  <script>
-    const signUpForm = document.getElementById("signUpForm");
-    if (signUpForm) {
-      signUpForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
-  
-        // Limpiar mensajes de error
-        const emailError = document.getElementById("emailError");
-        emailError!.textContent = "";
-        const passwordError = document.getElementById("passwordError");
-        passwordError!.textContent = "";
-        
-  
-       
-        const email = (
-          document.getElementById("email") as HTMLInputElement
-        ).value.trim();
-        const password = (document.getElementById("password") as HTMLInputElement)
-          .value;
-        
-  
-        let isValid = true;
+  <div class="container-form">
+    <form class="sign-up" id="signUpForm">
+      <h2>Inicia sesion</h2>
 
-        
-        // Validar email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-          document.getElementById("emailError")!.textContent =
-            "El email no es válido.";
-          isValid = false;
-        }
-  
-        // Validar contraseña (mínimo 8 caracteres)
-        if (password.length < 6) {
-          document.getElementById("passwordError")!.textContent =
-            "La contraseña debe tener al menos 6 caracteres.";
-          isValid = false;
-        }
-    
-        // Si todo es válido, enviar la solicitud
-        if (isValid) {
-          try {
-            const response = await fetch(
-              "https://planny-432016.uc.r.appspot.com/api/auth/register",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  name: clubName,
-                  email,
-                  password,
-                }),
-              }
-            );
-            if (response.ok) {
-              const data = await response.json();
-              console.log("🥑 ~ data:", data);
-              alert("Registro exitoso");
-            } else {
-              const errorData = await response.json();
-              alert(`Error: ${errorData.message}`);
+      <div class="container-input">
+        <input type="email" placeholder="Email" id="email" required />
+        <span class="error-message" id="emailError"></span>
+      </div>
+
+      <div class="container-input">
+        <input type="password" placeholder="Password" id="password" required />
+        <span class="error-message" id="passwordError"></span>
+      </div>
+
+      <button class="button" type="submit">INICIA SESION</button>
+    </form>
+  </div>
+</main>
+
+<script>
+  import { auth } from "../../utils/firebase";
+  import { signInWithEmailAndPassword } from "firebase/auth";
+
+  const signUpForm = document.getElementById("signUpForm");
+  if (signUpForm) {
+    signUpForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      // Limpiar mensajes de error
+      const emailError = document.getElementById("emailError");
+      emailError!.textContent = "";
+      const passwordError = document.getElementById("passwordError");
+      passwordError!.textContent = "";
+
+      const email = (
+        document.getElementById("email") as HTMLInputElement
+      ).value.trim();
+      const password = (document.getElementById("password") as HTMLInputElement)
+        .value;
+
+      let isValid = true;
+
+      // Validar email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        document.getElementById("emailError")!.textContent =
+          "El email no es válido.";
+        isValid = false;
+      }
+
+      // Validar contraseña (mínimo 8 caracteres)
+      if (password.length < 6) {
+        document.getElementById("passwordError")!.textContent =
+          "La contraseña debe tener al menos 6 caracteres.";
+        isValid = false;
+      }
+
+      // Si todo es válido, enviar la solicitud
+      if (isValid) {
+        try {
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const { user }: any = userCredential;
+          const response = await fetch(
+            "https://planny-432016.uc.r.appspot.com/api/auth/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                accessToken: user.accessToken,
+              }),
             }
-          } catch (error) {
-            console.error("Error:", error);
-            alert("Hubo un problema con el registro.");
+          );
+          if (response.ok) {
+            const data = await response.json();
+            console.log("🥑 ~ data:", data);
+            document.location.href = "/users";
+          } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.message}`);
           }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Hubo un problema con el registro.");
         }
-      });
-    }
-  </script>
-  
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-  
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Montserrat", sans-serif;
-    }
-  
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f0f0f0;
-    }
-  
+      }
+    });
+  }
+</script>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  .container-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  span {
+    display: block;
+    font-size: 0.875rem;
+    color: #777;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .container-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .container-input ion-icon {
+    color: #999;
+    font-size: 1.2rem;
+  }
+
+  .container-input input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+  }
+
+  .container-input input::placeholder {
+    color: #aaa;
+  }
+
+  .button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #e63946;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+  }
+
+  .button:hover {
+    background-color: #d62828;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    color: #e63946;
+    margin-top: 5px;
+  }
+
+  @media (min-width: 768px) {
     .container-form {
-      width: 100%;
-      max-width: 400px;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      padding: 40px;
     }
-  
+
     h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #333;
-      text-align: center;
-      margin-bottom: 10px;
+      font-size: 2rem;
     }
-  
-    span {
-      display: block;
-      font-size: 0.875rem;
-      color: #777;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  
-    .container-input {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      background-color: #f7f7f7;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 15px;
-    }
-  
-    .container-input ion-icon {
-      color: #999;
-      font-size: 1.2rem;
-    }
-  
-    .container-input input {
-      width: 100%;
-      border: none;
-      background-color: transparent;
-      padding-left: 10px;
-      font-size: 1rem;
-      color: #333;
-      outline: none;
-    }
-  
-    .container-input input::placeholder {
-      color: #aaa;
-    }
-  
+
     .button {
-      width: 100%;
-      padding: 10px 0;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      background-color: #e63946;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: background-color 0.3s;
+      font-size: 1.125rem;
     }
-  
-    .button:hover {
-      background-color: #d62828;
+  }
+
+  @media (max-width: 480px) {
+    .container-form {
+      padding: 15px;
     }
-  
-    .error-message {
-      font-size: 0.75rem;
-      color: #e63946;
-      margin-top: 5px;
+
+    h2 {
+      font-size: 1.25rem;
     }
-  
-    @media (min-width: 768px) {
-      .container-form {
-        max-width: 500px;
-        padding: 40px;
-      }
-  
-      h2 {
-        font-size: 2rem;
-      }
-  
-      .button {
-        font-size: 1.125rem;
-      }
+
+    .button {
+      font-size: 0.875rem;
     }
-  
-    @media (max-width: 480px) {
-      .container-form {
-        padding: 15px;
-      }
-  
-      h2 {
-        font-size: 1.25rem;
-      }
-  
-      .button {
-        font-size: 0.875rem;
-      }
-    }
-  </style>
-  
+  }
+</style>
