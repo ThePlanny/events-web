@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Pagina de usuario">
   <form id="registroForm" action="#" method="post">
-    <h2 class="title">ALMIGHTY PLANNY</h2>
+    <h2 class="title" id="companyName">ALMIGHTY PLANNY</h2>
 
     <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
     <input type="text" id="nombre" name="nombre" required />
@@ -39,3 +39,12 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </form>
 </Layout>
+
+<script>
+  import { getUser } from "../authentication/validateAuth";
+  const { displayName } = await getUser();
+  const companyName = document.getElementById("companyName");
+  if (companyName) {
+    companyName.textContent = displayName;
+  }
+</script>
