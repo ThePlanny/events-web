@@ -80,7 +80,7 @@
           if (response.ok) {
             const data = await response.json();
             console.log("🥑 ~ data:", data);
-            document.location.href = "/users";
+            // document.location.href = "/users";
           } else {
             const errorData = await response.json();
             alert(`Error: ${errorData.message}`);
