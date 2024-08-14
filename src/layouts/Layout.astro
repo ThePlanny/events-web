@@ -17,6 +17,7 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <button id="btn-logout">Cerrar sesion</button>
     <slot />
   </body>
 </html>
@@ -36,4 +37,10 @@ const { title } = Astro.props;
   if (!token) {
     location.href = "/auth/login";
   }
+
+  const btnLogout = document.getElementById("btn-logout");
+  btnLogout?.addEventListener("click", async () => {
+    localStorage.removeItem("user");
+    location.href = "/auth/login";
+  });
 </script>
