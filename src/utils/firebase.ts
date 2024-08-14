@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyCnfiw2i70tqhlwCOODUj5A2N37dldGqKs",
+  authDomain: "planny-events.firebaseapp.com",
+  projectId: "planny-events",
+  storageBucket: "planny-events.appspot.com",
+  messagingSenderId: "156637940173",
+  appId: "1:156637940173:web:41e6437b890c6372dedc84"
 };
 
 const app = initializeApp(firebaseConfig);
