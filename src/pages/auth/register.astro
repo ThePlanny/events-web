@@ -118,9 +118,8 @@
             }
           );
           if (response.ok) {
-            const data = await response.json();
-            console.log("🥑 ~ data:", data);
-            alert("Registro exitoso");
+            await response.json();
+            window.location.href = "/auth/login";
           } else {
             const errorData = await response.json();
             alert(`Error: ${errorData.message}`);
