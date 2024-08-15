@@ -3,8 +3,9 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="usuarios">
-  <a href="/createUser">Crear Deportista</a>
+  <a href="/createUser" class="createUser">Crear Deportista</a>
   <ul id="users-list"></ul>
+  <button class="music">Agrega tu pista</button>
 </Layout>
 
 <script>
@@ -25,5 +26,31 @@ import Layout from "../layouts/Layout.astro";
 </script>
 
 <style>
-  
+  * {
+    margin: 15px;
+    margin-top: 40px;
+    padding: 15px 20% 10px 10%;
+    height: 500px;
+  }
+
+  body {
+    background-color: rgb(215, 215, 210);
+  }
+  .containerBody {
+    box-shadow: 0 0 15px rgba(215, 33, 33, 0.1);
+    max-width: 500px;
+    width: 100%;
+    box-sizing: unset;
+  }
+  #users-list {
+    box-sizing: border-box;
+    width: 100%;
+    border: solid #5b6dcd 10px;
+    padding: 5px;
+  }
+  .music {
+    padding: 10px;
+    height: 30%;
+    background-color: red;
+  }
 </style>
