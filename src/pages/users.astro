@@ -22,36 +22,6 @@ import Layout from "../layouts/Layout.astro";
     li.textContent = user.fullName;
     usersList?.appendChild(li);
   });
-
-  // const createUserForm = document.getElementById("createUserForm");
-  // createUserForm?.addEventListener("submit", async (event) => {
-  //   event.preventDefault();
-
-  //   /// values
-  //   const fullName = (document.getElementById("nombre") as HTMLInputElement)
-  //     .value;
-  //   const documentNumber = (
-  //     document.getElementById("NameClub") as HTMLInputElement
-  //   ).value;
-  //   const documentType = (
-  //     document.getElementById("documento") as HTMLSelectElement
-  //   ).value;
-  //   const birthDate = (document.getElementById("fecha") as HTMLInputElement)
-  //     .value;
-  //   const email = (document.getElementById("email") as HTMLInputElement).value;
-
-  //   const params: Athlete = {
-  //     fullName,
-  //     birthDate,
-  //     documentNumber,
-  //     documentType,
-  //     email,
-  //   };
-
-  //   const athleteService = new AthleteService();
-  //   const response = await athleteService.createAthlete(params);
-  //   console.log(response);
-  // });
 </script>
 
 <style>
