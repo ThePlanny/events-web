@@ -4,17 +4,16 @@ import { getToken } from "../authentication/validateAuth";
 import type { Athlete } from "../interfaces/athlete";
 
 export class AthleteService {
-  async createAthlete(athlete: Athlete): Promise<Athlete> {
+  async createAthlete(athlete: FormData): Promise<Athlete> {
     const token = await getToken();
     const response = await fetch(
       "https://planny-432016.uc.r.appspot.com/api/athletes",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(athlete),
+        body: athlete,
       }
     );
 

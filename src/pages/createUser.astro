@@ -48,13 +48,25 @@ import Layout from "../layouts/Layout.astro";
 
       <div class="containerInput">
         <label>Documento de identidad</label>
-        <input type="file" name="archivo" id="archivo" value="file" multiple />
+        <input
+          type="file"
+          name="archivo"
+          id="documentFile"
+          value="file"
+          multiple
+        />
       </div>
 
       <!--Certificado Eps-->
       <div class="containerInput">
         <label>Certificado de EPS</label>
-        <input type="file" name="archivo" id="archivo" value="file" multiple />
+        <input
+          type="file"
+          name="archivo"
+          id="documentEPS"
+          value="file"
+          multiple
+        />
       </div>
     </div>
 
@@ -97,105 +109,105 @@ import Layout from "../layouts/Layout.astro";
     transition: background-color 0.3s;
   } */
   body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+    font-family: "Arial", sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-/* Form Container */
-#createUserForm {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 100%;
-}
-
-/* Title */
-.title {
-  font-size: 24px;
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Input Container */
-.containerInput {
-  margin-bottom: 15px;
-}
-
-/* Labels */
-.containerInput label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-/* Inputs and Selects */
-.containerInput input[type="text"],
-.containerInput input[type="email"],
-.containerInput input[type="date"],
-.containerInput select,
-.containerInput input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* File Input */
-.containerInput input[type="file"] {
-  padding: 3px;
-}
-
-/* Buttons */
-.button {
-  background-color: #cb6971;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #b85b62;
-}
-
-/* Headings */
-h4 {
-  font-size: 18px;
-  margin-top: 20px;
-  color: #555;
-}
-
-/* Responsive Design */
-@media (max-width: 500px) {
+  /* Form Container */
   #createUserForm {
-    padding: 15px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
   }
 
+  /* Title */
   .title {
-    font-size: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
   }
 
-  .button {
-    font-size: 14px;
-    padding: 10px;
+  /* Input Container */
+  .containerInput {
+    margin-bottom: 15px;
   }
-}
+
+  /* Labels */
+  .containerInput label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  /* Inputs and Selects */
+  .containerInput input[type="text"],
+  .containerInput input[type="email"],
+  .containerInput input[type="date"],
+  .containerInput select,
+  .containerInput input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  /* File Input */
+  .containerInput input[type="file"] {
+    padding: 3px;
+  }
+
+  /* Buttons */
+  .button {
+    background-color: #cb6971;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .button:hover {
+    background-color: #b85b62;
+  }
+
+  /* Headings */
+  h4 {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #555;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 500px) {
+    #createUserForm {
+      padding: 15px;
+    }
+
+    .title {
+      font-size: 20px;
+    }
+
+    .button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
 </style>
 
 <script>
@@ -218,6 +230,10 @@ h4 {
     const birthDate = (document.getElementById("birthDate") as HTMLInputElement)
       .value;
     const email = (document.getElementById("email") as HTMLInputElement).value;
+    const documentFile = (document.getElementById("documentFile") as any)
+      .files[0];
+    const documentEPS = (document.getElementById("documentEPS") as any)
+      .files[0];
 
     const params: Athlete = {
       fullName,
@@ -226,9 +242,17 @@ h4 {
       documentType,
       email,
     };
+    const formData = new FormData();
+    formData.append("documentFile", documentFile);
+    formData.append("documentEPS", documentEPS);
+    formData.append("fullName", params.fullName);
+    formData.append("birthDate", params.birthDate);
+    formData.append("documentNumber", params.documentNumber);
+    formData.append("documentType", params.documentType);
+    formData.append("email", params.email);
 
     const athleteService = new AthleteService();
-    const response = await athleteService.createAthlete(params);
+    const response = await athleteService.createAthlete(formData);
     window.location.href = "/users";
   });
 </script>
