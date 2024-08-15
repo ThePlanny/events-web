@@ -6,15 +6,26 @@ import Layout from "../layouts/Layout.astro";
   <form id="registroForm" action="#" method="post">
     <h2 class="title">ALMIGHTY PLANNY</h2>
 
-    <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
-    <input type="text" id="nombre" name="nombre" required />
+      <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
+      <input type="text" id="nombre" name="nombre" required />
 
-    <label for="nombre"><h4>Numero de documento:</h4></label>
-    <input type="text" id="NameClub" name="Nombre del club" required />
+      <h4>Selecciona tipon de documento:</h4>
+      <select name="documento" id="documento">
+        <optgroup label="Selecciona tu documento">
+          <option value="documento">Selecciona</option>
+          <option value="documento">Tarjeta de identidad</option>
+          <option value="documento">Cedula de ciudadania</option>
+          <option value="documento">Registro Civil</option>
+          <option value="documento">Pasaporte</option>
+        </optgroup>
+      </select>
+
+      <label for="nombre"><h4>Numero de documento:</h4></label>
+      <input type="text" id="NameClub" name="Nombre del club" required />
 
     <div class="selection">
       <label for="fecha"><h4>Fecha de nacimiento:</h4></label>
-      <input type="date" id="fecha" name="fecha" />
+      <input type="date" id="fecha" name="fecha" max="2020/08/14" />
 
       <h4>Cargue sus documentos</h4>
 
@@ -25,17 +36,33 @@ import Layout from "../layouts/Layout.astro";
       <!--Certificado Eps-->
       <h5>Certificado de EPS</h5>
       <input type="file" name="archivo" id="archivo" value="file" multiple />
-
-      <h5>Selecciona tipon de documento</h5>
-      <select name="documento" id="documento">
-        <optgroup label="Selecciona tu documento">
-          <option value="documento">Selecciona</option>
-          <option value="documento">Tarjeta de identidad</option>
-          <option value="documento">Cedula de ciudadania</option>
-          <option value="documento">Registro Civil</option>
-          <option value="documento">Pasaporte</option>
-        </optgroup>
-      </select>
     </div>
   </form>
 </Layout>
+
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+  #registroForm {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding-left: 100px;
+  }
+  .title {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+  }
+  .container {
+
+}
+</style>
