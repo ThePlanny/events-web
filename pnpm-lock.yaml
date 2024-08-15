@@ -20,6 +20,10 @@ importers:
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
+    devDependencies:
+      tslib:
+        specifier: ^2.6.3
+        version: 2.6.3
 
 packages:
 

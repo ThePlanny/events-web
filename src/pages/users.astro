@@ -1,34 +1,161 @@
 <form id="registroForm" action="#" method="post">
-    <h2 class="title">ALMIGHTY PLANNY</h2>
+  <h2 class="title">ALMIGHTY PLANNY</h2>
 
-                <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
-                <input type="text" id="nombre" name="nombre" required>
-                
-                <label for="nombre"><h4>Numero de documento:</h4></label>
-                <input type="text" id="NameClub" name="Nombre del club" required>
+  <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
+  <input type="text" id="nombre" name="nombre" required />
 
-                <div class="selection">
-                <label for="fecha"><h4>Fecha de nacimiento:</h4></label>
-                <input type="date" id="fecha" name="fecha">
+  <label for="nombre"><h4>Numero de documento:</h4></label>
+  <input type="text" id="NameClub" name="Nombre del club" required />
 
-                <h4>Cargue sus documentos</h4>
+  <div class="selection">
+    <label for="fecha"><h4>Fecha de nacimiento:</h4></label>
+    <input type="date" id="fecha" name="fecha" />
 
-                <!--Certificado de documento de identidad-->
-                <h5>Documento de identidad</h5>
-                <input type="file" name="archivo" id="archivo" value="file" multiple>
-                    
-                <!--Certificado Eps-->
-                <h5>Certificado de EPS</h5>
-                <input type="file" name="archivo" id="archivo" value="file" multiple>
-        
-                <h5>Selecciona tipon de documento</h5>
-                <select name="documento" id="documento">
-                <optgroup label="Selecciona tu documento">
+    <h4>Cargue sus documentos</h4>
+
+    <!--Certificado de documento de identidad-->
+    <h5>Documento de identidad</h5>
+    <input type="file" name="archivo" id="archivo" value="file" multiple />
+
+    <!--Certificado Eps-->
+    <h5>Certificado de EPS</h5>
+    <input type="file" name="archivo" id="archivo" value="file" multiple />
+
+    <h5>Selecciona tipon de documento</h5>
+    <select name="documento" id="documento">
+      <optgroup label="Selecciona tu documento">
         <option value="documento">Selecciona</option>
         <option value="documento">Tarjeta de identidad</option>
         <option value="documento">Cedula de ciudadania</option>
         <option value="documento">Registro Civil</option>
         <option value="documento">Pasaporte</option>
-                </div>
+      </optgroup>
+    </select>
 
-    </form>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f0f0f0;
+      }
+
+      .container-form {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      span {
+        display: block;
+        font-size: 0.875rem;
+        color: #777;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .container-input {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: #f7f7f7;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 15px;
+      }
+
+      .container-input ion-icon {
+        color: #999;
+        font-size: 1.2rem;
+      }
+
+      .container-input input {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        padding-left: 10px;
+        font-size: 1rem;
+        color: #333;
+        outline: none;
+      }
+
+      .container-input input::placeholder {
+        color: #aaa;
+      }
+
+      .button {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        background-color: #e63946;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #d62828;
+      }
+
+      .error-message {
+        font-size: 0.75rem;
+        color: #e63946;
+        margin-top: 5px;
+      }
+
+      @media (min-width: 768px) {
+        .container-form {
+          max-width: 500px;
+          padding: 40px;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .button {
+          font-size: 1.125rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container-form {
+          padding: 15px;
+        }
+
+        h2 {
+          font-size: 1.25rem;
+        }
+
+        .button {
+          font-size: 0.875rem;
+        }
+      }
+    </style>
+  </div>
+</form>
