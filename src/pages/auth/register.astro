@@ -1,47 +1,54 @@
 ---
-// import Layout from '../layouts/Layout.astro';
+import AuthLayout from "../../layouts/AuthLayout.astro";
 ---
 
-<main>
-  <div class="container-form">
-    <form class="sign-up" id="signUpForm">
-      <h2>Registrarse</h2>
-      <span>Use su correo electronico para registrarse</span>
-      <div class="container-input">
-        <ion-icon name="people-circle-outline"></ion-icon>
-        <input
-          type="text"
-          placeholder="Nombre del club"
-          id="clubName"
-          required
-        />
-        <span class="error-message" id="clubNameError"></span>
-      </div>
-      <div class="container-input">
-        <ion-icon name="mail-outline"></ion-icon>
-        <input type="email" placeholder="Email" id="email" required />
-        <span class="error-message" id="emailError"></span>
-      </div>
+<AuthLayout title="Autenticacion de planny">
+  <main>
+    <div class="container-form">
+      <form class="sign-up" id="signUpForm">
+        <h2>Registrarse</h2>
+        <span>Use su correo electronico para registrarse</span>
+        <div class="container-input">
+          <ion-icon name="people-circle-outline"></ion-icon>
+          <input
+            type="text"
+            placeholder="Nombre del club"
+            id="clubName"
+            required
+          />
+          <span class="error-message" id="clubNameError"></span>
+        </div>
+        <div class="container-input">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="email" placeholder="Email" id="email" required />
+          <span class="error-message" id="emailError"></span>
+        </div>
 
-      <div class="container-input">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <input type="password" placeholder="Password" id="password" required />
-        <span class="error-message" id="passwordError"></span>
-      </div>
-      <div class="container-input">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          id="confirmPassword"
-          required
-        />
-        <span class="error-message" id="confirmPasswordError"></span>
-      </div>
-      <button class="button" type="submit">REGISTRARSE</button>
-    </form>
-  </div>
-</main>
+        <div class="container-input">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            required
+          />
+          <span class="error-message" id="passwordError"></span>
+        </div>
+        <div class="container-input">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            id="confirmPassword"
+            required
+          />
+          <span class="error-message" id="confirmPasswordError"></span>
+        </div>
+        <button class="button" type="submit">REGISTRARSE</button>
+      </form>
+    </div>
+  </main>
+</AuthLayout>
 
 <script>
   const signUpForm = document.getElementById("signUpForm");
@@ -122,9 +129,8 @@
             }
           );
           if (response.ok) {
-            const data = await response.json();
-            console.log("🥑 ~ data:", data);
-            alert("Registro exitoso");
+            await response.json();
+            window.location.href = "/auth/login";
           } else {
             const errorData = await response.json();
             alert(`Error: ${errorData.message}`);
