@@ -3,29 +3,38 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="usuarios">
-  <form id="registroForm" action="#" method="post">
+  <form id="createUserForm">
     <h2 class="title">ALMIGHTY PLANNY</h2>
 
-      <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
-      <input type="text" id="nombre" name="nombre" required />
+    <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
+    <input type="text" id="nombre" name="nombre" required />
 
-      <h4>Selecciona tipon de documento:</h4>
-      <select name="documento" id="documento">
-        <optgroup label="Selecciona tu documento">
-          <option value="documento">Selecciona</option>
-          <option value="documento">Tarjeta de identidad</option>
-          <option value="documento">Cedula de ciudadania</option>
-          <option value="documento">Registro Civil</option>
-          <option value="documento">Pasaporte</option>
-        </optgroup>
-      </select>
+    <h4>Selecciona tipon de documento:</h4>
+    <select name="documento" id="documentType">
+      <optgroup label="Selecciona tu documento">
+        <option value="documento">Selecciona</option>
+        <option value="documento">Tarjeta de identidad</option>
+        <option value="documento">Cedula de ciudadania</option>
+        <option value="documento">Registro Civil</option>
+        <option value="documento">Pasaporte</option>
+      </optgroup>
+    </select>
 
-      <label for="nombre"><h4>Numero de documento:</h4></label>
-      <input type="text" id="NameClub" name="Nombre del club" required />
+    <label for="nombre"><h4>Numero de documento:</h4></label>
+    <input type="text" id="documentNumber" name="Nombre del club" required />
+
+    <label for="nombre"><h4>Correo electronico:</h4></label>
+    <input type="email" id="email" name="Correo electronico" required />
 
     <div class="selection">
       <label for="fecha"><h4>Fecha de nacimiento:</h4></label>
-      <input type="date" id="fecha" name="fecha" max="2020/08/14" />
+      <input
+        type="date"
+        id="birthDate"
+        name="fecha"
+        max="2020/08/14"
+        required
+      />
 
       <h4>Cargue sus documentos</h4>
 
@@ -76,3 +85,38 @@ import Layout from "../layouts/Layout.astro";
     transition: background-color 0.3s;
   }
 </style>
+
+<script>
+  import type { Athlete } from "../interfaces/athlete";
+  import { AthleteService } from "../services/athlete";
+
+  const createUserForm = document.getElementById("createUserForm");
+  createUserForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    /// values
+    const fullName = (document.getElementById("nombre") as HTMLInputElement)
+      .value;
+    const documentNumber = (
+      document.getElementById("documentNumber") as HTMLInputElement
+    ).value;
+    const documentType = (
+      document.getElementById("documentType") as HTMLSelectElement
+    ).value;
+    const birthDate = (document.getElementById("birthDate") as HTMLInputElement)
+      .value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+
+    const params: Athlete = {
+      fullName,
+      birthDate,
+      documentNumber,
+      documentType,
+      email,
+    };
+
+    const athleteService = new AthleteService();
+    const response = await athleteService.createAthlete(params);
+    window.location.href = "/users";
+  });
+</script>
