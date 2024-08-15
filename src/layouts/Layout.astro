@@ -23,7 +23,7 @@ const { title } = Astro.props;
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/users">Lista de Usuarios</a></li>
+          <li><a href="/users">Deportistas</a></li>
           <li><a  id="btn-logout">Cerrar Sesión</a></li>
         </ul>
       </nav>
@@ -50,12 +50,6 @@ const { title } = Astro.props;
     display: flex;
     flex-direction: column;
     height: 100vh;
-  }
-  .contentBody {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1rem;
   }
 
   .header {
@@ -86,10 +80,17 @@ const { title } = Astro.props;
   .nav a {
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .nav a:hover {
     text-decoration: underline;
+  }
+  #btn-logout {
+    color: #dddddd;
+  }
+  #btn-logout:hover {
+    color: #da7070;
   }
 
   /* Estilos para el botón de menú */

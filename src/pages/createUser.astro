@@ -3,75 +3,82 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="usuarios">
-  <form id="createUserForm">
-    <h2 class="title" id="title">ALMIGHTY PLANNY</h2>
-
-    <div class="containerInput">
-      <label for="nombre">Nombre completo del deportista:</label>
-      <input type="text" id="nombre" name="nombre" required />
-    </div>
-
-    <div class="containerInput">
-      <label>Selecciona tipon de documento:</label>
-      <select name="documento" id="documentType">
-        <optgroup label="Selecciona tu documento">
-          <option value="documento">Selecciona</option>
-          <option value="documento">Tarjeta de identidad</option>
-          <option value="documento">Cedula de ciudadania</option>
-          <option value="documento">Registro Civil</option>
-          <option value="documento">Pasaporte</option>
-        </optgroup>
-      </select>
-    </div>
-
-    <div class="containerInput">
-      <label for="nombre">Numero de documento:</label>
-      <input type="text" id="documentNumber" name="Nombre del club" required />
-    </div>
-
-    <div class="containerInput">
-      <label for="nombre">Correo electronico:</label>
-      <input type="email" id="email" name="Correo electronico" required />
-    </div>
-
-    <div class="containerInput">
-      <label for="fecha">Fecha de nacimiento:</label>
-      <input
-        type="date"
-        id="birthDate"
-        name="fecha"
-        max="2020/08/14"
-        required
-      />
-
-      <h4>Cargue sus documentos</h4>
+  <div class="contentBody">
+    <form id="createUserForm">
+      <h2 class="title" id="title">ALMIGHTY PLANNY</h2>
 
       <div class="containerInput">
-        <label>Documento de identidad</label>
+        <label for="nombre">Nombre completo del deportista:</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+
+      <div class="containerInput">
+        <label>Selecciona tipon de documento:</label>
+        <select name="documento" id="documentType">
+          <optgroup label="Selecciona tu documento">
+            <option value="documento">Selecciona</option>
+            <option value="documento">Tarjeta de identidad</option>
+            <option value="documento">Cedula de ciudadania</option>
+            <option value="documento">Registro Civil</option>
+            <option value="documento">Pasaporte</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="containerInput">
+        <label for="nombre">Numero de documento:</label>
         <input
-          type="file"
-          name="archivo"
-          id="documentFile"
-          value="file"
-          multiple
+          type="text"
+          id="documentNumber"
+          name="Nombre del club"
+          required
         />
       </div>
 
-      <!--Certificado Eps-->
       <div class="containerInput">
-        <label>Certificado de EPS</label>
-        <input
-          type="file"
-          name="archivo"
-          id="documentEPS"
-          value="file"
-          multiple
-        />
+        <label for="nombre">Correo electronico:</label>
+        <input type="email" id="email" name="Correo electronico" required />
       </div>
-    </div>
 
-    <button class="button">Registrarse</button>
-  </form>
+      <div class="containerInput">
+        <label for="fecha">Fecha de nacimiento:</label>
+        <input
+          type="date"
+          id="birthDate"
+          name="fecha"
+          max="2020/08/14"
+          required
+        />
+
+        <h4>Cargue sus documentos</h4>
+
+        <div class="containerInput">
+          <label>Documento de identidad</label>
+          <input
+            type="file"
+            name="archivo"
+            id="documentFile"
+            value="file"
+            multiple
+          />
+        </div>
+
+        <!--Certificado Eps-->
+        <div class="containerInput">
+          <label>Certificado de EPS</label>
+          <input
+            type="file"
+            name="archivo"
+            id="documentEPS"
+            value="file"
+            multiple
+          />
+        </div>
+      </div>
+
+      <button class="button">Registrarse</button>
+    </form>
+  </div>
 </Layout>
 
 <style>
@@ -108,6 +115,12 @@ import Layout from "../layouts/Layout.astro";
     text-transform: uppercase;
     transition: background-color 0.3s;
   } */
+  .contentBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+  }
 
   /* Form Container */
   #createUserForm {
