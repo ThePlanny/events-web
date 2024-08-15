@@ -37,6 +37,7 @@ import Layout from "../layouts/Layout.astro";
       <h5>Certificado de EPS</h5>
       <input type="file" name="archivo" id="archivo" value="file" multiple />
     </div>
+    <button class="button">Crear usuario</button>
   </form>
 </Layout>
 
@@ -62,7 +63,16 @@ import Layout from "../layouts/Layout.astro";
     justify-content: left;
     align-items: flex-start;
   }
-  .container {
-
-}
+  .button {
+    width: 40%;
+    padding: 15px 0;
+    font-weight: 700;
+    color: #fff;
+    background-color: #cb6971;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+  }
 </style>
