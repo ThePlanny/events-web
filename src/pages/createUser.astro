@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="usuarios">
+  <form id="createUserForm" action="#" method="post">
+    <h2 class="title">ALMIGHTY PLANNY</h2>
+
+    <label for="nombre"><h4>Nombre completo del deportista:</h4></label>
+    <input type="text" id="nombre" name="nombre" required />
+
+    <label for="nombre"><h4>Numero de documento:</h4></label>
+    <input type="text" id="NameClub" name="Nombre del club" required />
+
+    <div class="selection">
+      <label for="fecha"><h4>Fecha de nacimiento:</h4></label>
+      <input type="date" id="fecha" name="fecha" />
+
+      <h4>Cargue sus documentos</h4>
+
+      <!--Certificado de documento de identidad-->
+      <h5>Documento de identidad</h5>
+      <input type="file" name="archivo" id="archivo" value="file" multiple />
+
+      <!--Certificado Eps-->
+      <h5>Certificado de EPS</h5>
+      <input type="file" name="archivo" id="archivo" value="file" multiple />
+
+      <h5>Selecciona tipon de documento</h5>
+      <select name="documento" id="documento">
+        <optgroup label="Selecciona tu documento">
+          <option value="documento">Selecciona</option>
+          <option value="documento">Tarjeta de identidad</option>
+          <option value="documento">Cedula de ciudadania</option>
+          <option value="documento">Registro Civil</option>
+          <option value="documento">Pasaporte</option>
+        </optgroup>
+      </select>
+    </div>
+  </form>
+</Layout>
+
+<script>
+  import type { Athlete } from "../interfaces/athlete";
+  import { AthleteService } from "../services/athlete";
+
+  const createUserForm = document.getElementById("createUserForm");
+  createUserForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    /// values
+    const fullName = (document.getElementById("nombre") as HTMLInputElement)
+      .value;
+    const documentNumber = (
+      document.getElementById("NameClub") as HTMLInputElement
+    ).value;
+    const documentType = (
+      document.getElementById("documento") as HTMLSelectElement
+    ).value;
+    const birthDate = (document.getElementById("fecha") as HTMLInputElement)
+      .value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+
+    const params: Athlete = {
+      fullName,
+      birthDate,
+      documentNumber,
+      documentType,
+      email,
+    };
+
+    const athleteService = new AthleteService();
+    const response = await athleteService.createAthlete(params);
+    console.log(response);
+  });
+</script>
