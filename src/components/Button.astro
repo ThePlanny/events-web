@@ -1,8 +1,11 @@
 ---
+import Loader from "./Loader.astro";
 const { isLoading, label } = Astro.props;
 ---
 
-<button disabled={isLoading} class="button">{label}</button>
+<button disabled={isLoading} class="button">
+  {isLoading ? <Loader /> : label}
+</button>
 
 <style>
   .button {
