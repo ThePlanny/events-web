@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 // Components
 import { AthleteListItem } from "../../components/AthleteListItem";
+import { Loader } from "../../components/Loader";
 
 // Interfaces
 import type { Athlete } from "../../interfaces/athlete";
@@ -12,17 +13,40 @@ import { AthleteService } from "../../services/athlete";
 
 export const AthletesList = () => {
   const [athletes, setAthletes] = useState<Athlete[]>([]);
-  console.log("🥑 ~ AthletesList ~ athletes:", athletes);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getAthletes = async () => {
-    const athleteService = new AthleteService();
-    const data: Athlete[] = await athleteService.getAllAthletes();
-    setAthletes(data);
+    try {
+      const athleteService = new AthleteService();
+      const data: Athlete[] = await athleteService.getAllAthletes();
+      setAthletes(data);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     getAthletes();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          height: "50vh",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+        }}
+      >
+        <div>
+          <Loader color="red" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <ul className={styles.container}>
