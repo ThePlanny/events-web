@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
 ---
 
 <Layout title="usuarios">
@@ -76,7 +77,8 @@ import Layout from "../layouts/Layout.astro";
         </div>
       </div>
 
-      <button class="button">Registrarse</button>
+      <Button isLoading={false} label="Registrarse" />
+      <!-- <button class="button" id="btn-register">Registrarse</button> -->
     </form>
   </div>
 </Layout>
@@ -115,6 +117,7 @@ import Layout from "../layouts/Layout.astro";
     text-transform: uppercase;
     transition: background-color 0.3s;
   } */
+
   .contentBody {
     display: flex;
     justify-content: center;
@@ -172,23 +175,6 @@ import Layout from "../layouts/Layout.astro";
     padding: 3px;
   }
 
-  /* Buttons */
-  .button {
-    background-color: #cb6971;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-
-  .button:hover {
-    background-color: #b85b62;
-  }
-
   /* Headings */
   h4 {
     font-size: 18px;
@@ -218,15 +204,22 @@ import Layout from "../layouts/Layout.astro";
   import { AthleteService } from "../services/athlete";
   import { getUser } from "../authentication/validateAuth";
 
-  const user = await getUser();
+  // elements
   const title = document.getElementById("title");
+  const btnRegister = document.getElementById("btn-register");
+  const createUserForm = document.getElementById("createUserForm");
+
+  // variables
+  let isLoading: boolean = false;
+
+  const user = await getUser();
   if (title) {
     title.textContent = `Bienvenido a ${user?.displayName}`;
   }
 
-  const createUserForm = document.getElementById("createUserForm");
   createUserForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
+    toogleLoader(true);
 
     /// values
     const fullName = (document.getElementById("nombre") as HTMLInputElement)
@@ -261,8 +254,25 @@ import Layout from "../layouts/Layout.astro";
     formData.append("documentType", params.documentType);
     formData.append("email", params.email);
 
-    const athleteService = new AthleteService();
-    const response = await athleteService.createAthlete(formData);
-    window.location.href = "/users";
+    // const athleteService = new AthleteService();
+    // const response = await athleteService.createAthlete(formData);
+    setTimeout(() => {
+      toogleLoader(false);
+      alert("Usuario creado correctamente");
+    }, 5000);
+    // toogleLoader(false);
+    // window.location.href = "/users";
   });
+
+  const toogleLoader = (value: boolean) => {
+    isLoading = value;
+
+    if (isLoading) {
+      btnRegister?.setAttribute("disabled", "true");
+      // btnRegister?.textContent = "Cargando...";
+    } else {
+      btnRegister?.removeAttribute("disabled");
+      // btnRegister?.textContent = "Registrarse";
+    }
+  };
 </script>
