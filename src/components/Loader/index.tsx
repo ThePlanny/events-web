@@ -1,5 +1,14 @@
 import styles from "./loader.module.css";
 
-export const Loader = () => {
-  return <div className={styles.loader}></div>;
+interface LoaderProps {
+  color?: string;
+}
+
+export const Loader = ({ color }: LoaderProps) => {
+  return (
+    <div
+      className={styles.loader}
+      style={{ borderRightColor: color || "#FFF" }}
+    ></div>
+  );
 };
