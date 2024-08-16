@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="usuarios">
   <a href="/createUser" class="createUser">Crear Deportista</a>
   <ul id="users-list"></ul>
-  <button class="music">Agrega tu pista</button>
+  <button class="delet">Eliminar deportista</button>
 </Layout>
 
 <script>
@@ -26,21 +26,37 @@ import Layout from "../layouts/Layout.astro";
 </script>
 
 <style>
-  .containerBody {
-    box-shadow: 0 0 15px rgba(215, 33, 33, 0.1);
-    max-width: 500px;
-    width: 100%;
-    box-sizing: unset;
-  }
   #users-list {
-    box-sizing: border-box;
-    width: 100%;
-    border: solid #5b6dcd 10px;
-    padding: 5px;
+    background-color: #ffffff;
+    margin-left: 5%;
+    margin-right: 30%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    list-style-type: decimal;
   }
-  .music {
-    padding: 10px;
-    height: 30%;
-    background-color: red;
+
+  /* Button */
+  .createUser {
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10%;
+  }
+  .delet{
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10%;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 500px) {
+    #createUserForm {
+      padding: 15px;
+    }
+
+    .createUser {
+      font-size: 14px;
+      padding: 10px;
+    }
   }
 </style>
