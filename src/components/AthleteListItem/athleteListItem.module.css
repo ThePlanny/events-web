@@ -1,0 +1,54 @@
+.item {
+  padding: 0.75rem 1.5rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.picture {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgb(230, 230, 230);
+}
+.image {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.conteinerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
+}
+.name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+.email {
+  font-size: 0.8rem;
+  margin: 0;
+  color: #575757;
+}
+
+.status {
+  font-size: 0.8rem;
+  margin: 0;
+  color: #038f49;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.statusIcon {
+  font-size: 2rem;
+}
+.statusText {
+  font-size: 0.8rem;
+  margin: 0;
+}

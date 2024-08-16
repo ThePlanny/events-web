@@ -1,37 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { AthletesList } from "../screens/athletes/AthletesList";
 ---
 
 <Layout title="usuarios">
-  <a href="/createUser" class="createUser">Crear Deportista</a>
-  <ul id="users-list"></ul>
-  <button class="delet">Eliminar deportista</button>
+  <div class="container_users">
+    <a href="/createUser" class="createUser">Crear Deportista</a>
+    <AthletesList client:only />
+    <!-- <button class="delet">Eliminar deportista</button> -->
+  </div>
 </Layout>
 
-<script>
-  import type { Athlete } from "../interfaces/athlete";
-  import { AthleteService } from "../services/athlete";
-
-  const usersList = document.getElementById("users-list");
-
-  const athleteService = new AthleteService();
-  const users: Athlete[] = await athleteService.getAllAthletes();
-
-  users.forEach((user) => {
-    console.log("🥑 ~ users.forEach ~ user:", user);
-    const li = document.createElement("li");
-    li.textContent = user.fullName;
-    usersList?.appendChild(li);
-  });
-</script>
-
 <style>
-  #users-list {
-    background-color: #ffffff;
-    margin-left: 5%;
-    margin-right: 30%;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    list-style-type: decimal;
+  .container_users {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* Button */

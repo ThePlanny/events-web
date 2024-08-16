@@ -1,5 +1,6 @@
 import "./createAthelete.css";
 import { useState } from "react";
+import { navigate } from "astro:transitions/client";
 
 // Interfaces
 import type { Athlete } from "../../interfaces/athlete";
@@ -51,7 +52,7 @@ export const CreateAthleteForm = () => {
 
     try {
       await createAthlete(formData);
-      window.location.href = "/users";
+      navigate("/users");
     } catch (error) {
     } finally {
       setIsLoading(false);
