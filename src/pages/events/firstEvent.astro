@@ -1,44 +1,51 @@
 <h1 class="title">Primer evento</h1>
+<div class="information">
+  <p class="innformationEvent">Ingresar la informacion del evento</p>
+  <p class="informationCompany">Ingresar la informacion del evento</p>
+</div>
 
-<p class="innformationEvent">Ingresar la informacion del evento</p>
+<div class="content">
+  <div class="select">
+    <select name="text" id="text">
+      <optgroup label="Nivel">
+        <option value="documento">Nivel</option>
+        <option value="documento">1.1</option>
+        <option value="documento">2.1</option>
+        <option value="documento">1</option>
+        <option value="documento">2</option>
+        <option value="documento">3</option>
+        <option value="documento">4.2</option>
+        <option value="documento">4</option>
+        <option value="documento">5</option>
+        <option value="documento">6</option>
+        <option value="documento">7</option>
+      </optgroup>
+    </select>
 
-<div class="select">
-  <select name="text" id="text">
-    <optgroup label="Nivel">
-      <option value="documento">Nivel</option>
-      <option value="documento">1.1</option>
-      <option value="documento">2.1</option>
-      <option value="documento">1</option>
-      <option value="documento">2</option>
-      <option value="documento">3</option>
-      <option value="documento">4.2</option>
-      <option value="documento">4</option>
-      <option value="documento">5</option>
-      <option value="documento">6</option>
-      <option value="documento">7</option>
-    </optgroup>
-  </select>
+    <select name="text" id="text">
+      <optgroup label="División">
+        <option value="documento">División</option>
+        <option value="documento">Tiny</option>
+        <option value="documento">Miny</option>
+        <option value="documento">Youth</option>
+        <option value="documento">Junior</option>
+        <option value="documento">Open</option>
+        <option value="documento">Senior</option>
+      </optgroup>
+    </select>
 
-  <select name="text" id="text">
-    <optgroup label="División">
-      <option value="documento">División</option>
-      <option value="documento">Tiny</option>
-      <option value="documento">Miny</option>
-      <option value="documento">Youth</option>
-      <option value="documento">Junior</option>
-      <option value="documento">Open</option>
-      <option value="documento">Senior</option>
-    </optgroup>
-  </select>
-
-  <select name="text" id="text">
-    <optgroup label="Sub-división">
-      <option value="documento">Sub-división</option>
-      <option value="documento">Unica</option>
-      <option value="documento">Femenino</option>
-      <option value="documento">Coed</option>
-    </optgroup>
-  </select>
+    <select name="text" id="text">
+      <optgroup label="Sub-división">
+        <option value="documento">Sub-división</option>
+        <option value="documento">Unica</option>
+        <option value="documento">Femenino</option>
+        <option value="documento">Coed</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="button">
+    <button class="burtton">Resgistrarse</button>
+  </div>
 </div>
 
 <style>
@@ -56,18 +63,37 @@
     justify-content: center;
     align-items: baseline;
   }
+  .information {
+    display: flex;
+    margin: 20px 50px;
+    padding: 50px 50px;
+    justify-content: center;
+  }
   .innformationEvent {
-    width: 300px;
-    height: 200px;
+    width: 500px;
+    height: 250px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    margin-left: 100px;
-    margin-top: 100px;
+    padding: 5px 130px;
+  }
+  .informationCompany {
+    width: 500px;
+    height: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 5px 130px;
+  }
+  .content{
+    display: flex;
+    justify-content: space-between;
   }
   .select {
     display: flex;
-    justify-content: center;
-    align-items: baseline;
-    margin: 50px;
+    margin-left: 100px;
+    justify-content: space-between;
+  }
+  .button {
+    margin-left: 300px;
+    margin-right: 75px;
   }
 </style>
