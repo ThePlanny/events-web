@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 // Components
 import { AthleteListItem } from "../../components/AthleteListItem";
 import { Loader } from "../../components/Loader";
+import { Button } from "../../components/Button";
 
 // Interfaces
 import type { Athlete } from "../../interfaces/athlete";
@@ -49,10 +50,15 @@ export const AthletesList = () => {
   }
 
   return (
-    <ul className={styles.container}>
-      {athletes.map((athlete) => (
-        <AthleteListItem athlete={athlete} key={athlete.id} />
-      ))}
-    </ul>
+    <>
+      <header style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button label="Agregar deportista" href="/createUser" />
+      </header>
+      <ul className={styles.container}>
+        {athletes.map((athlete) => (
+          <AthleteListItem athlete={athlete} key={athlete.id} />
+        ))}
+      </ul>
+    </>
   );
 };
