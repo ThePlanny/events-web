@@ -34,6 +34,13 @@ export const CreateAthleteForm = () => {
     const documentEPS = (document.getElementById("documentEPS") as any)
       .files[0];
 
+    // validate files size < 1mb
+    if (documentFile.size > 1000000 || documentEPS.size > 1000000) {
+      alert("El tamaño de los archivos no puede ser mayor a 1mb");
+      setIsLoading(false);
+      return;
+    }
+
     const params: Athlete = {
       fullName,
       birthDate,
