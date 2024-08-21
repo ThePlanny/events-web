@@ -1,71 +1,82 @@
-<h1 class="title">V torneo abierto departamental de porrismo</h1>
-<div class="information">
-  <p class="innformationEvent">
-    <strong>V torneo abierto departamental de porrismo</strong>a realizarse en
-    la ciudad de Mosquera el día 01 de septiembre 2024,Lugar: Mosquera, Nuevo
-    Coliseo, Categorías: Cheer All Stars, Cheer Colegial, Performance Cheer,
-    Divisiones Especiales. Valor de inscripción Cheer y Performance Cheer:
-    $70.000 por deportista para Clubes afiliados a la Liga. $85.000 por
-    deportista para Clubes, colegios o equipos No Afiliados, Valor de
-    inscripción categorías especiales y Crossovers $30.000 por deportista para
-    Clubes afiliados a la Liga. $40.000 por deportista para Clubes, colegios o
-    equipos No Afiliados El pago de las inscripciones debe ser realizado por el
-    presidente del club, entrenador o delegado del equipo y/o institución a más
-    tardar el día 28 de agosto, pasada esta fecha no se recibirá ningún pago y
-    se cancelará la inscripción de los equipos registrados que no hayan
-    realizado el pago, este debe realizarse a la cuenta de ahorros # 33700002768
-    del banco BANCOLOMBIA a nombre de la LIGA DE PORRISMO DE CUNDINAMARCA
-  </p>
-  <img src="/src/pages/events/imgInfo.jpg" alt="" class="informationCompany">
-</div>
+---
+import Layout from "../../layouts/Layout.astro";
+---
 
-<div class="content">
-  <div class="select">
-    <select name="text" id="text">
-      <optgroup label="Nivel">
-        <option value="documento">Nivel</option>
-        <option value="documento">1.1</option>
-        <option value="documento">2.1</option>
-        <option value="documento">1</option>
-        <option value="documento">2</option>
-        <option value="documento">3</option>
-        <option value="documento">4.2</option>
-        <option value="documento">4</option>
-        <option value="documento">5</option>
-        <option value="documento">6</option>
-        <option value="documento">7</option>
-      </optgroup>
-    </select>
-
-    <select name="text" id="text">
-      <optgroup label="División">
-        <option value="documento">División</option>
-        <option value="documento">Tiny</option>
-        <option value="documento">Miny</option>
-        <option value="documento">Youth</option>
-        <option value="documento">Junior</option>
-        <option value="documento">Open</option>
-        <option value="documento">Senior</option>
-      </optgroup>
-    </select>
-
-    <select name="text" id="text">
-      <optgroup label="Sub-división">
-        <option value="documento">Sub-división</option>
-        <option value="documento">Unica</option>
-        <option value="documento">Femenino</option>
-        <option value="documento">Coed</option>
-      </optgroup>
-    </select>
+<Layout title="Evento">
+  <h1 class="title">V torneo abierto departamental de porrismo</h1>
+  <div class="information">
+    <p class="innformationEvent">
+      <strong>V torneo abierto departamental de porrismo</strong>a realizarse en
+      la ciudad de Mosquera el día 01 de septiembre 2024,Lugar: Mosquera, Nuevo
+      Coliseo, Categorías: Cheer All Stars, Cheer Colegial, Performance Cheer,
+      Divisiones Especiales. Valor de inscripción Cheer y Performance Cheer:
+      $70.000 por deportista para Clubes afiliados a la Liga. $85.000 por
+      deportista para Clubes, colegios o equipos No Afiliados, Valor de
+      inscripción categorías especiales y Crossovers $30.000 por deportista para
+      Clubes afiliados a la Liga. $40.000 por deportista para Clubes, colegios o
+      equipos No Afiliados El pago de las inscripciones debe ser realizado por
+      el presidente del club, entrenador o delegado del equipo y/o institución a
+      más tardar el día 28 de agosto, pasada esta fecha no se recibirá ningún
+      pago y se cancelará la inscripción de los equipos registrados que no hayan
+      realizado el pago, este debe realizarse a la cuenta de ahorros #
+      33700002768 del banco BANCOLOMBIA a nombre de la LIGA DE PORRISMO DE
+      CUNDINAMARCA
+    </p>
+    <img
+      src="/src/pages/events/imgInfo.jpg"
+      alt=""
+      class="informationCompany"
+    />
   </div>
-  <div class="button">
-    <button class="burtton">Resgistrarse</button>
+
+  <div class="content">
+    <div class="select">
+      <select name="text" id="text">
+        <optgroup label="Nivel">
+          <option value="documento">Nivel</option>
+          <option value="documento">1.1</option>
+          <option value="documento">2.1</option>
+          <option value="documento">1</option>
+          <option value="documento">2</option>
+          <option value="documento">3</option>
+          <option value="documento">4.2</option>
+          <option value="documento">4</option>
+          <option value="documento">5</option>
+          <option value="documento">6</option>
+          <option value="documento">7</option>
+        </optgroup>
+      </select>
+
+      <select name="text" id="text">
+        <optgroup label="División">
+          <option value="documento">División</option>
+          <option value="documento">Tiny</option>
+          <option value="documento">Miny</option>
+          <option value="documento">Youth</option>
+          <option value="documento">Junior</option>
+          <option value="documento">Open</option>
+          <option value="documento">Senior</option>
+        </optgroup>
+      </select>
+
+      <select name="text" id="text">
+        <optgroup label="Sub-división">
+          <option value="documento">Sub-división</option>
+          <option value="documento">Unica</option>
+          <option value="documento">Femenino</option>
+          <option value="documento">Coed</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="button">
+      <button class="burtton">Resgistrarse</button>
+    </div>
   </div>
-</div>
-<div class="input">
-  <input type="text" placeholder="Nombre del equipo" id="name" required />
-  <span class="error-message" id="nameError"></span>
-</div>
+  <div class="input">
+    <input type="text" placeholder="Nombre del equipo" id="name" required />
+    <span class="error-message" id="nameError"></span>
+  </div>
+</Layout>
 
 <style>
   * {
@@ -113,7 +124,6 @@
     margin-top: 0%;
     justify-content: space-between;
     margin-top: -50px;
-
   }
   .button {
     margin-left: 300px;
