@@ -5,31 +5,75 @@ import Layout from "../../layouts/Layout.astro";
 <Layout title="Evento">
   <h1 class="title">V torneo abierto departamental de porrismo</h1>
   <div class="information">
-    <p class="innformationEvent">
-      <strong>V torneo abierto departamental de porrismo</strong>a realizarse en
-      la ciudad de Mosquera el día 01 de septiembre 2024,Lugar: Mosquera, Nuevo
-      Coliseo, Categorías: Cheer All Stars, Cheer Colegial, Performance Cheer,
-      Divisiones Especiales. Valor de inscripción Cheer y Performance Cheer:
-      $70.000 por deportista para Clubes afiliados a la Liga. $85.000 por
-      deportista para Clubes, colegios o equipos No Afiliados, Valor de
-      inscripción categorías especiales y Crossovers $30.000 por deportista para
-      Clubes afiliados a la Liga. $40.000 por deportista para Clubes, colegios o
-      equipos No Afiliados El pago de las inscripciones debe ser realizado por
-      el presidente del club, entrenador o delegado del equipo y/o institución a
-      más tardar el día 28 de agosto, pasada esta fecha no se recibirá ningún
-      pago y se cancelará la inscripción de los equipos registrados que no hayan
-      realizado el pago, este debe realizarse a la cuenta de ahorros #
-      33700002768 del banco BANCOLOMBIA a nombre de la LIGA DE PORRISMO DE
-      CUNDINAMARCA
-    </p>
-    <img
-      src="/src/pages/events/imgInfo.jpg"
-      alt=""
-      class="informationCompany"
-    />
+    <section>
+      <h3>Descripción</h3>
+      <p>
+        Torneo de porrismo con categorías Cheer All Stars, Cheer Colegial,
+        Performance Cheer y Divisiones Especiales. Inscripción abierta hasta el
+        28 de agosto. Para más información, contacta a la LIGA DE PORRISMO DE
+        CUNDINAMARCA.
+      </p>
+    </section>
+
+    <ul>
+      <li><strong>Fecha:</strong> 01 de septiembre de 2024</li>
+      <li><strong>Lugar:</strong> Mosquera, Nuevo Coliseo</li>
+    </ul>
+
+    <section>
+      <h3>Categorías</h3>
+      <ul>
+        <li>Cheer All Stars</li>
+        <li>Cheer Colegial</li>
+        <li>Performance Cheer</li>
+        <li>Divisiones Especiales</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Valor de Inscripción</h3>
+      <ul>
+        <li>
+          <h4>Cheer y Performance Cheer</h4>
+          <p>Clubes afiliados a la Liga: $70.000 por deportista</p>
+          <p>Clubes, colegios o equipos No Afiliados: $85.000 por deportista</p>
+        </li>
+        <li>
+          <h4>Categorías Especiales y Crossovers:</h4>
+          <p>Clubes afiliados a la Liga: $30.000 por deportista</p>
+          <p>Clubes, colegios o equipos No Afiliados: $40.000 por deportista</p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Proceso de Inscripción</h3>
+      <ul>
+        <li>Fecha límite para el pago: 28 de agosto de 2024</li>
+        <li>
+          El pago debe ser realizado por el presidente del club, entrenador,
+          delegado del equipo y/o institución.
+        </li>
+        <li>
+          Cuenta para el pago: Cuenta de ahorros #33700002768 del banco
+          BANCOLOMBIA a nombre de la LIGA DE PORRISMO DE CUNDINAMARCA.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Notas Importantes</h3>
+      <ul>
+        <li>No se recibirá ningún pago después del 28 de agosto.</li>
+        <li>
+          La inscripción de los equipos que no hayan realizado el pago antes de
+          la fecha límite será cancelada.
+        </li>
+      </ul>
+    </section>
   </div>
 
-  <div class="content">
+  <!-- <div class="content">
     <div class="select">
       <select name="text" id="text">
         <optgroup label="Nivel">
@@ -75,7 +119,7 @@ import Layout from "../../layouts/Layout.astro";
   <div class="input">
     <input type="text" placeholder="Nombre del equipo" id="name" required />
     <span class="error-message" id="nameError"></span>
-  </div>
+  </div> -->
 </Layout>
 
 <style>
@@ -95,10 +139,10 @@ import Layout from "../../layouts/Layout.astro";
     margin-bottom: 0%;
   }
   .information {
-    display: flex;
-    margin: 0% 50px;
+    /* display: flex; */
+    /* margin: 0% 50px;
     padding: 50px 50px;
-    justify-content: center;
+    justify-content: center; */
   }
   .innformationEvent {
     width: 500px;
