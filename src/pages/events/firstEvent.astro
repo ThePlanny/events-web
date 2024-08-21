@@ -2,8 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title="Evento" />
-<div class="contentBody">
+<Layout title="Evento - V Torneo Abierto Departamental de Porrismo" />
+<article class="contentBody">
   <header class="header-view">
     <picture class="portada-container">
       <img src="/public/images/imgInfo.jpg" alt="Portada evento" />
@@ -134,7 +134,7 @@ import Layout from "../../layouts/Layout.astro";
     <input type="text" placeholder="Nombre del equipo" id="name" required />
     <span class="error-message" id="nameError"></span>
   </div> -->
-</div>
+</article>
 
 <style>
   .contentBody {
@@ -225,8 +225,7 @@ import Layout from "../../layouts/Layout.astro";
   // Establece la fecha de inicio del período de inscripción
   const startDate = new Date("August 29, 2024 00:00:00").getTime();
 
-  // Actualiza la cuenta regresiva cada segundo
-  const countdown = setInterval(() => {
+  const updateCountDown = () => {
     // Obtiene la fecha y hora actual
     const now = new Date().getTime();
 
@@ -253,5 +252,10 @@ import Layout from "../../layouts/Layout.astro";
         countdownElement!.innerHTML = "¡Inscripciones cerradas!";
       }
     }
-  }, 1000);
+  };
+
+  updateCountDown();
+
+  // Actualiza la cuenta regresiva cada segundo
+  const countdown = setInterval(updateCountDown, 1000);
 </script>
