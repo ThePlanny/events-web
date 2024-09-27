@@ -1,17 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Button } from "../../components/Button";
+import { EnrollButton } from "../../components/EnrollButton";
 ---
 
 <Layout title="Evento - V Torneo Abierto Departamental de Porrismo">
   <article class="contentBody">
     <header class="header-view">
       <picture class="portada-container">
-        <img src="/public/images/imgInfo.jpg" alt="Portada evento" />
+        <img src="/images/imgInfo.jpg" alt="Portada evento" />
       </picture>
       <div class="container-title">
         <h1 class="title">V torneo abierto departamental de porrismo</h1>
-        <Button label="Incribirme" />
+        <EnrollButton client:load />
         <div class="countdown" id="countdown">
           Las incripciones se cierran en: <span id="timer"></span>
         </div>
@@ -89,7 +89,7 @@ import { Button } from "../../components/Button";
         </ul>
       </section>
 
-      <Button label="Incribirme" />
+      <EnrollButton />
     </div>
 
     <!-- <div class="content">
