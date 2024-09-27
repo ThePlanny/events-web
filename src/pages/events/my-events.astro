@@ -4,6 +4,10 @@ import Layout from "../../layouts/Layout.astro";
 
 <Layout title="Mis eventos">
   <div class="content">
+    <div class="input">
+      <input type="text" placeholder="Nombre del equipo" id="name" required />
+      <span class="error-message" id="nameError"></span>
+    </div>
     <div class="select">
       <select name="text" id="text">
         <optgroup label="Nivel">
@@ -41,15 +45,13 @@ import Layout from "../../layouts/Layout.astro";
           <option value="documento">Coed</option>
         </optgroup>
       </select>
-    </div>
-    <div class="button">
-      <button class="burtton">Resgistrarse</button>
+      <div class="button">
+        <button class="burtton">Resgistrarse</button>
+      </div>      
     </div>
   </div>
-  <div class="input">
-    <input type="text" placeholder="Nombre del equipo" id="name" required />
-    <span class="error-message" id="nameError"></span>
-  </div>
+  
+  
 </Layout>
 
 <style>
@@ -57,18 +59,37 @@ import Layout from "../../layouts/Layout.astro";
     box-sizing: border-box;
     margin: 15px;
     padding: 5px;
+    background-color: antiquewhite;
   }
 
   body {
     background-color: rgb(216, 202, 202);
+    
   }
-  .title {
+
+  .input{
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    
   }
-  .select {
+
+  .content {
     margin-right: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
   }
   
+  .select {
+    
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .select button{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 </style>
