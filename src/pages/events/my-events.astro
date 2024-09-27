@@ -3,13 +3,72 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Mis eventos">
-  <h3>Aun no tienes eventos registrados</h3>
+  <div class="content">
+    <div class="select">
+      <select name="text" id="text">
+        <optgroup label="Nivel">
+          <option value="documento">Nivel</option>
+          <option value="documento">1.1</option>
+          <option value="documento">2.1</option>
+          <option value="documento">1</option>
+          <option value="documento">2</option>
+          <option value="documento">3</option>
+          <option value="documento">4.2</option>
+          <option value="documento">4</option>
+          <option value="documento">5</option>
+          <option value="documento">6</option>
+          <option value="documento">7</option>
+        </optgroup>
+      </select>
+
+      <select name="text" id="text">
+        <optgroup label="División">
+          <option value="documento">División</option>
+          <option value="documento">Tiny</option>
+          <option value="documento">Miny</option>
+          <option value="documento">Youth</option>
+          <option value="documento">Junior</option>
+          <option value="documento">Open</option>
+          <option value="documento">Senior</option>
+        </optgroup>
+      </select>
+
+      <select name="text" id="text">
+        <optgroup label="Sub-división">
+          <option value="documento">Sub-división</option>
+          <option value="documento">Unica</option>
+          <option value="documento">Femenino</option>
+          <option value="documento">Coed</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="button">
+      <button class="burtton">Resgistrarse</button>
+    </div>
+  </div>
+  <div class="input">
+    <input type="text" placeholder="Nombre del equipo" id="name" required />
+    <span class="error-message" id="nameError"></span>
+  </div>
 </Layout>
 
-
 <style>
-  h3 {
-    text-align: center;
-    margin-top: 2rem;
+  * {
+    box-sizing: border-box;
+    margin: 15px;
+    padding: 5px;
   }
+
+  body {
+    background-color: rgb(216, 202, 202);
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+  .select {
+    margin-right: 50px;
+  }
+  
 </style>
