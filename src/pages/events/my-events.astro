@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro"; 
 ---
 
 <Layout title="Mis eventos">
@@ -8,103 +8,186 @@ import Layout from "../../layouts/Layout.astro";
       <input type="text" placeholder="Nombre del equipo" id="name" required />
       <span class="error-message" id="nameError"></span>
     </div>
-    <div class="select">
-      <select name="Categoria" id="text">
-        <option value="documento">Categoria</option>
-          <option value="documento">Cheer equipos All Stars</option>
-          <option value="documento">Cheer equipos Colegial</option>
-          <option value="documento">Cheer equipos Universitario</option>
+
+    <div class="select1">
+      <label for="Categoria">Deporte:</label>
+      <select id="Categoria" onchange="handleCategoryChange()">
+        <option value="">--Seleccionar Deporte--</option>
+        <option value="cheerleading">Cheerleading</option>
+        <option value="parkour">Parkour</option>
+        <option value="gimnasia">Gimnasia</option>
+      </select>
+
+      <div id="cheerleadingOptions" class="options" style="display: none;">
+        <label for="cheerCategoria">Porras Categoría:</label>
+        <select name="Categoria" id="cheerCategoria">
+          <option value="">--Seleccionar Categoría--</option>
+          <option value="allStars">Cheer equipos All Stars</option>
+          <option value="colegial">Cheer equipos Colegial</option>
+          <option value="universitario">Cheer equipos Universitario</option>
           <hr>
-          <option value="documento">Performance grupos All Stars</option>
-          <option value="documento">Performance grupos Colegial</option>
-          <option value="documento">Performance grupos Universitario</option>
-        </optgroup>
-      </select>
-      <select name="text" id="text">
-        <optgroup label="Cheerleading">
-          <option value="documento">Nivel</option>
-          <option value="documento">1.1</option>
-          <option value="documento">2.1</option>
-          <option value="documento">1</option>
-          <option value="documento">2</option>
-          <option value="documento">3</option>
-          <option value="documento">4.2</option>
-          <option value="documento">4</option>
-          <option value="documento">5</option>
-          <option value="documento">6</option>
-          <option value="documento">7</option>
-      <optgroup label="Baile">
-          <option value="documento">Pms</option>
-          <option value="documento">Jazz</option>
-          <option value="documento">Hip Hop</option>
-        </optgroup>
-      </select>
+          <option value="performanceAllStars">Performance grupos All Stars</option>
+          <option value="performanceColegial">Performance grupos Colegial</option>
+          <option value="performanceUniversitario">Performance grupos Universitario</option>
+        </select>
 
-      <select name="text" id="text">
-        <optgroup label="División">
-          <option value="documento">División</option>
-          <option value="documento">Tiny</option>
-          <option value="documento">Miny</option>
-          <option value="documento">Youth</option>
-          <option value="documento">Junior</option>
-          <option value="documento">Open</option>
-          <option value="documento">Senior</option>
-        </optgroup>
-      </select>
+        <label for="cheerNivel">Nivel:</label>
+        <select id="cheerNivel">
+          <option value="">Nivel</option>
+          <option value="1.1">1.1</option>
+          <option value="2.1">2.1</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="4.2">4.2</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
 
-      <select name="text" id="text">
-        <optgroup label="Sub-división">
-          <option value="documento">Sub-división</option>
-          <option value="documento">Unica</option>
-          <option value="documento">Femenino</option>
-          <option value="documento">Coed</option>
-        </optgroup>
-      </select>
-      <div class="button">
-        <button class="burtton">Resgistrarse</button>
-      </div>      
+        <label for="cheerDivision">División:</label>
+        <select id="cheerDivision">
+          <option value="">--Seleccionar División--</option>
+          <option value="tiny">Tiny</option>
+          <option value="mini">Mini</option>
+          <option value="youth">Youth</option>
+          <option value="junior">Junior</option>
+          <option value="open">Open</option>
+          <option value="senior">Senior</option>
+        </select>
+
+        <label for="cheerSubdivision">Sub-división:</label>
+        <select id="cheerSubdivision">
+          <option value="">--Seleccionar Sub-división--</option>
+          <option value="unica">Única</option>
+          <option value="femenino">Femenino</option>
+          <option value="coed">Coed</option>
+        </select>
+
+        <label for="cheerBaile">Baile:</label>
+        <select id="cheerBaile">
+          <optgroup label="Baile">
+            <option value="poms">Cheerleading</option>
+            <option value="poms">Poms</option>
+            <option value="jazz">Jazz</option>
+            <option value="hiphop">Hip Hop</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div id="parkourOptions" class="options" style="display: none;">
+        <label for="parkourCategoria">Parkour Categoría:</label>
+        <select name="parkourCategoria" id="parkourCategoria">
+          <option value="">--Seleccionar Categoría--</option>
+          <option value="preNivel">PRE-NIVEL (Speed + Skill)</option>
+          <option value="nivel1">NIVEL 1 (Speed + Skill)</option>
+          <option value="nivel2">NIVEL 2 (Speed + Freestyle)</option>
+          <option value="nivelOpen">NIVEL OPEN (Speed + Freestyle)</option>
+        </select>
+      </div>
+
+      <div id="gimnasiaOptions" class="options" style="display: none;">
+        <label for="gimnasiaCategoria">Gimnasia Categoría:</label>
+        <select name="gimnasiaCategoria" id="gimnasiaCategoria">
+          <option value="">--Seleccionar Categoría--</option>
+          <option value="trampolin">Trampolín</option>
+          <option value="dobleMini">Doble mini</option>
+          <option value="tumbling">Tumbling</option>
+          <option value="minitramp">Minitramp</option>
+        </select>
+
+        <label for="gimnasiaNivel">Trampolín Nivel:</label>
+        <select id="gimnasiaNivel">
+          <option value="">Nivel</option>
+          <option value="preNivel">PRE-NIVEL</option>
+          <option value="nivel1">Nivel 1</option>
+          <option value="nivel2">Nivel 2</option>
+          <option value="nivel3">Nivel 3</option>
+          <option value="nivel4">Nivel 4</option>
+          <option value="nivel5">Nivel 5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="button">
+      <button class="button" onclick="agregarSeleccion()">Registrarse</button>
+    </div>
+
+    <!-- Sección donde se mostrará el listado de selecciones -->
+    <div id="resultado">
+      <h3>Registro de selecciones:</h3>
+      <ul id="listaSeleccion"></ul>
     </div>
   </div>
-  
-  
 </Layout>
+
+<script>
+  // Función para mostrar las opciones según la categoría seleccionada
+  function handleCategoryChange() {
+    const categoria = document.getElementById("Categoria").value;
+    document.getElementById("cheerleadingOptions").style.display = categoria === "cheerleading" ? "block" : "none";
+    document.getElementById("parkourOptions").style.display = categoria === "parkour" ? "block" : "none";
+    document.getElementById("gimnasiaOptions").style.display = categoria === "gimnasia" ? "block" : "none";
+  }
+
+  // Función para validar la selección y agregarla al listado
+  function agregarSeleccion() {
+    const categoria = document.getElementById("Categoria").value;
+    const lista = document.getElementById("listaSeleccion");
+    let valid = true;
+    let seleccionTexto = "";
+
+    if (!categoria) {
+      alert("Por favor, seleccione un deporte.");
+      valid = false;
+    }
+
+    if (categoria === "cheerleading") {
+      const cheerCategoria = document.getElementById("cheerCategoria").value;
+      const cheerNivel = document.getElementById("cheerNivel").value;
+      const cheerDivision = document.getElementById("cheerDivision").value;
+      const cheerSubdivision = document.getElementById("cheerSubdivision").value;
+      const cheerBaile = document.getElementById("cheerBaile").value;
+
+      seleccionTexto = `Deporte: Cheerleading, Categoría: ${cheerCategoria}, Nivel: ${cheerNivel}, División: ${cheerDivision}, Sub-división: ${cheerSubdivision}, Baile: ${cheerBaile}`;
+
+      if (!cheerCategoria || !cheerNivel || !cheerDivision || !cheerSubdivision || !cheerBaile) {
+        alert("Por favor, complete todas las selecciones de Cheerleading.");
+        valid = false;
+      }
+    } else if (categoria === "parkour") {
+      const parkourCategoria = document.getElementById("parkourCategoria").value;
+      seleccionTexto = `Deporte: Parkour, Categoría: ${parkourCategoria}`;
+
+      if (!parkourCategoria) {
+        alert("Por favor, seleccione una categoría de Parkour.");
+        valid = false;
+      }
+    } else if (categoria === "gimnasia") {
+      const gimnasiaCategoria = document.getElementById("gimnasiaCategoria").value;
+      const gimnasiaNivel = document.getElementById("gimnasiaNivel").value;
+      seleccionTexto = `Deporte: Gimnasia, Categoría: ${gimnasiaCategoria}, Nivel: ${gimnasiaNivel}`;
+
+      if (!gimnasiaCategoria || !gimnasiaNivel) {
+        alert("Por favor, complete todas las selecciones de Gimnasia.");
+        valid = false;
+      }
+    }
+
+    if (valid) {
+      // Agregar el texto al listado
+      const listItem = document.createElement("li");
+      listItem.textContent = seleccionTexto;
+      lista.appendChild(listItem);
+      alert("¡Registro completado!");
+    }
+  }
+</script>
 
 <style>
   * {
     box-sizing: border-box;
     margin: 15px;
-    padding: 5px;
-    background-color: antiquewhite;
+    padding
   }
-
-  body {
-    background-color: rgb(216, 202, 202);
-    
-  }
-
-  .input{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    
-  }
-
-  .content {
-    margin-right: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-  }
-  
-  .select {
-    
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-
-  .select button{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-</style>
