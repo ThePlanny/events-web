@@ -83,7 +83,7 @@ export const CreateAthleteForm = () => {
       </div>
 
       <div className="containerInput">
-        <label>Selecciona tipon de documento:</label>
+        <label>Selecciona tipo de documento:</label>
         <select name="documento" id="documentType" required>
           <option value="documento">Tarjeta de identidad</option>
           <option value="documento">Cedula de ciudadania</option>
