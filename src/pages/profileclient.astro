@@ -3,14 +3,16 @@ layout: "@layouts/BaseLayout.astro"
 ---
 
 <style>
+   
   .club-profile {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 900px;
+    margin: 5% auto;
     padding: 20px;
-    background: #f8f9fa;
+    background: #e5eaf0;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     font-family: Arial, sans-serif;
+    
   }
 
   .club-header {
@@ -19,7 +21,7 @@ layout: "@layouts/BaseLayout.astro"
   }
 
   .club-header h1 {
-    color: #ff4081;
+    color: #de1515; ;
   }
 
   .club-description {
@@ -43,29 +45,22 @@ layout: "@layouts/BaseLayout.astro"
   }
 
   .club-actions button:hover {
-    background-color: #ff4081;
+    background-color: #de1515;
     color: white;
   }
 
-  .output {
-    margin-top: 20px;
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
 </style>
 
 <div class="club-profile">
   <div class="club-header">
-    <h1>Club de Porras "Estrellas Brillantes"</h1>
-    <p>¡Dedicados a la energía, la pasión y el trabajo en equipo!</p>
+    <h1> Club de Porras "Estrellas Brillantes" </h1>
+    <p> ¡Dedicados a la energia, la pasion y el trabajo en equipo! </p>
   </div>
 
   <div class="club-description">
-    <p>En nuestro club de porras, nos esforzamos por fomentar el espíritu deportivo y el trabajo en equipo. 
+    <p>En nuestro club de porras, nos esforzamos por fomentar el espiritu deportivo y el trabajo en equipo. 
     Contamos con entrenadores certificados y un ambiente inclusivo para deportistas de todas las edades. 
-    ¡Únete a nosotros y lleva tu energía al siguiente nivel!</p>
+    ¡Unete a nosotros y lleva tu energia al siguiente nivel!</p>
   </div>
 
   <div class="club-actions">
@@ -73,7 +68,6 @@ layout: "@layouts/BaseLayout.astro"
     <button id="show-total">Total de Deportistas</button>
   </div>
 
-  <div id="output" class="output"></div>
 </div>
 
 
