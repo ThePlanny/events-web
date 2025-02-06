@@ -1,6 +1,7 @@
 import styles from "./athleteListItem.module.css";
 import { TrashIcon } from "../../icons/TrashIcon";
 import { EditIcon } from "../../icons/EditIcon";
+import { AthleteService } from "../../services/athlete";
 
 // Interfaces
 import type { Athlete } from "../../interfaces/athlete";
@@ -10,9 +11,17 @@ interface AthleteListItemProps {
 }
 
 export const AthleteListItem = ({ athlete }: AthleteListItemProps) => {
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    if (athlete.id === undefined) return;
+    if (!window.confirm("¿Estás seguro de eliminar este deportista?")) return;
+    const athleteService = new AthleteService();
+    athleteService.deleteAthlete(athlete.id);
+    window.location.reload();
+  };
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    console.log("Edit");
+  };
 
   return (
     <li className={styles.item}>
