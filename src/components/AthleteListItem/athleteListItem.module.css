@@ -52,3 +52,38 @@
   font-size: 0.8rem;
   margin: 0;
 }
+
+
+.buttonIconDelete {
+  font-size: 1.5rem;
+  color: #989898;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+.buttonIconDelete:hover {
+  color: #ff0000;
+}
+.buttonIconDelete:focus {
+  outline: none;
+}
+.buttonIconDelete:active {
+  color: #ff8787;
+}
+
+.buttonIcon {
+  font-size: 1.5rem;
+  color: #989898;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+.buttonIcon:hover {
+  color: #007bff;
+}
+.buttonIcon:focus {
+  outline: none;
+}
+.buttonIcon:active {
+  color: #6cb2eb;
+}

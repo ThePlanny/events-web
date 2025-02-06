@@ -56,4 +56,48 @@ export class AthleteService {
       id: athlete.id,
     }));
   }
+
+  async deleteAthlete(id: string): Promise<void> {
+    const token = await getToken();
+    const response = await fetch(
+      `https://planny-432016.uc.r.appspot.com/api/athletes/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) throw new Error("Error deleting athlete");
+
+    return;
+  }
+
+  async updateAthlete(athlete: FormData, id: string): Promise<Athlete> {
+    const token = await getToken();
+    const response = await fetch(
+      `https://planny-432016.uc.r.appspot.com/api/athletes/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: athlete,
+      }
+    );
+
+    if (!response.ok) throw new Error("Error updating athlete");
+
+    const data = await response.json();
+
+    return {
+      birthDate: data.birthDate,
+      email: data.email,
+      documentNumber: data.documentNumber,
+      documentType: data.documentType,
+      fullName: data.fullName,
+      id: data.id,
+    };
+  }
 }
