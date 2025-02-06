@@ -1,0 +1,110 @@
+---
+layout: "@layouts/BaseLayout.astro"
+---
+
+<style>
+  .user-profile {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    position: relative;
+  }
+
+  .profile-info {
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .profile-info p {
+    margin: 10px 0;
+  }
+
+  .document-list {
+    margin-top: 20px;
+  }
+
+  .document-list a {
+    display: block;
+    margin: 5px 0;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .document-list a:hover {
+    text-decoration: underline;
+  }
+
+  .edit-button {
+    background: #ff5722;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+
+  .edit-button:hover {
+    background: #e64a19;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<div class="user-profile">
+  <button id="edit-profile" class="edit-button">Editar</button>
+  <h2>Informacion del Usuario</h2>
+  
+  <div id="profile-view" class="profile-info">
+    <p><strong>Nombre:</strong> <span id="user-name-display">Alex Gomez</span></p>
+    <p><strong>Email:</strong> <span id="user-email-display">Alex.gomez@example.com</span></p>
+    <p><strong>Telefono:</strong> <span id="user-phone-display">3028650802</span></p>
+    <p><strong>Telefono:</strong> <span id="user-clubInfo-display">Ochoas all stars</span></p>
+  </div>
+
+  <form id="profile-edit-form" class="hidden">
+    <div class="profile-info">
+      <label>Nombre:</label>
+      <input type="text" id="user-name" value="Alex Gomez" required>
+      <label>Email:</label>
+      <input type="email" id="user-email" value="Alex.gomez@example.com" required>
+      <label>Teléfono:</label>
+      <input type="tel" id="user-phone" value="3028650802" required>
+      <label>Informacion club actual:</label>
+      <input type="text" id="user-club" value="Ochoas All Stars" required>
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <div class="document-list">
+    <h3>Documentos</h3>
+    <a href="#" download>Documento1.pdf</a>
+    <a href="#" download>Documento2.pdf</a>
+  </div>
+</div>
+
+<script is:inline>
+  document.getElementById('edit-profile').addEventListener('click', function() {
+    document.getElementById('profile-view').classList.add('hidden');
+    document.getElementById('profile-edit-form').classList.remove('hidden');
+  });
+
+  document.getElementById('profile-edit-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    document.getElementById('user-name-display').innerText = document.getElementById('user-name').value;
+    document.getElementById('user-email-display').innerText = document.getElementById('user-email').value;
+    document.getElementById('user-phone-display').innerText = document.getElementById('user-phone').value;
+    document.getElementById('profile-view').classList.remove('hidden');
+    document.getElementById('profile-edit-form').classList.add('hidden');
+  });
+</script>
