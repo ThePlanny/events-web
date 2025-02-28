@@ -5,4 +5,6 @@ export interface Athlete {
   documentNumber: string;
   email: string;
   birthDate: string;
+  guardianName?: string;  // Agregado (opcional)
+  contactNumber?: string; // Agregado (opcional)
 }

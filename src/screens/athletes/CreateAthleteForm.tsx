@@ -33,6 +33,12 @@ export const CreateAthleteForm = () => {
       .files[0];
     const documentEPS = (document.getElementById("documentEPS") as any)
       .files[0];
+      const guardianName = (
+        document.getElementById("guardianName") as HTMLSelectElement
+      )?.value || "";
+      const contactNumber = (
+        document.getElementById("contactNumber") as HTMLSelectElement
+      )?.value || "";
 
     // validate files size < 1mb
     if (documentFile.size > 1000000 || documentEPS.size > 1000000) {
@@ -47,6 +53,8 @@ export const CreateAthleteForm = () => {
       documentNumber,
       documentType,
       email,
+      guardianName,
+      contactNumber,
     };
     const formData = new FormData();
     formData.append("documentFile", documentFile);
@@ -56,6 +64,8 @@ export const CreateAthleteForm = () => {
     formData.append("documentNumber", params.documentNumber);
     formData.append("documentType", params.documentType);
     formData.append("email", params.email);
+    formData.append("guardianName", params.guardianName || "");
+    formData.append("contactNumber", params.contactNumber || "");
 
     try {
       await createAthlete(formData);
@@ -108,21 +118,6 @@ export const CreateAthleteForm = () => {
       </div>
 
       <div className="containerInput">
-        <label htmlFor="nombre">Nombre completo del acudiente en caso de ser menor de edad:</label>
-        <input type="text" id="nombre" name="nombre" required />
-      </div>
-
-      <div className="containerInput">
-        <label htmlFor="nombre">Numero contacto del acudiente:</label>
-        <input
-          type="text"
-          id="PhoneNumber"
-          name="Numero documento del acudiente"
-          required
-        />
-      </div>
-
-      <div className="containerInput">
         <label htmlFor="fecha">Fecha de nacimiento:</label>
         <input
           type="date"
@@ -144,6 +139,21 @@ export const CreateAthleteForm = () => {
       <div className="containerInput">
         <label>Certificado de EPS</label>
         <input type="file" name="archivo" id="documentEPS" required />
+      </div>
+
+      <div className="containerInput">
+        <label htmlFor="nombre">Nombre completo del acudiente en caso de ser menor de edad:</label>
+        <input type="text" id="guardianName" name="Nombre acudiente" required />
+      </div>
+
+      <div className="containerInput">
+        <label htmlFor="nombre">Numero contacto del acudiente:</label>
+        <input
+          type="text"
+          id="contactNumberl"
+          name="Numero documento del acudiente"
+          required
+        />
       </div>
 
       <Button isLoading={isLoading} label="Registrarse" />
