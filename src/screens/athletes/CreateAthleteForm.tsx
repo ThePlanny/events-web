@@ -108,12 +108,28 @@ export const CreateAthleteForm = () => {
       </div>
 
       <div className="containerInput">
+        <label htmlFor="nombre">Nombre completo del acudiente en caso de ser menor de edad:</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+
+      <div className="containerInput">
+        <label htmlFor="nombre">Numero contacto del acudiente:</label>
+        <input
+          type="text"
+          id="PhoneNumber"
+          name="Numero documento del acudiente"
+          required
+        />
+      </div>
+
+      <div className="containerInput">
         <label htmlFor="fecha">Fecha de nacimiento:</label>
         <input
           type="date"
           id="birthDate"
           name="fecha"
-          max="2020/08/14"
+          min="1964-01-01"
+          max="2019-01-01"
           required
         />
       </div>
