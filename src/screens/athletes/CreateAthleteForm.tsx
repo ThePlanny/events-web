@@ -14,35 +14,30 @@ import { Button } from "../../components/Button";
 
 export const CreateAthleteForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showGuardianFields, setShowGuardianFields] = useState<boolean>(false);
+
+  const handleDocumentTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedType = event.target.value;
+    setShowGuardianFields(selectedType === "TI" || selectedType === "RC");
+  };
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    // values
-    const fullName = (document.getElementById("nombre") as HTMLInputElement)
-      .value;
-    const documentNumber = (
-      document.getElementById("documentNumber") as HTMLInputElement
-    ).value;
-    const documentType = (
-      document.getElementById("documentType") as HTMLSelectElement
-    ).value;
-    const birthDate = (document.getElementById("birthDate") as HTMLInputElement)
-      .value;
-    const email = (document.getElementById("email") as HTMLInputElement).value;
-    const documentFile = (document.getElementById("documentFile") as any)
-      .files[0];
-    const documentEPS = (document.getElementById("documentEPS") as any)
-      .files[0];
-      const guardianName = (
-        document.getElementById("guardianName") as HTMLSelectElement
-      )?.value || "";
-      const contactNumber = (
-        document.getElementById("contactNumber") as HTMLSelectElement
-      )?.value || "";
+    setErrorMessage(null);
 
-    // validate files size < 1mb
+    const fullName = (document.getElementById("nombre") as HTMLInputElement).value;
+    const documentNumber = (document.getElementById("documentNumber") as HTMLInputElement).value;
+    const documentType = (document.getElementById("documentType") as HTMLSelectElement).value;
+    const birthDate = (document.getElementById("birthDate") as HTMLInputElement).value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+    const documentFile = (document.getElementById("documentFile") as any).files[0];
+    const documentEPS = (document.getElementById("documentEPS") as any).files[0];
+    const guardianName = showGuardianFields ? (document.getElementById("guardianName") as HTMLInputElement).value : "";
+    const contactNumber = showGuardianFields ? (document.getElementById("contactNumber") as HTMLInputElement).value : "";
+
     if (documentFile.size > 1000000 || documentEPS.size > 1000000) {
-      alert("El tamaño de los archivos no puede ser mayor a 1mb");
+      alert("El tamaño de los archivos no puede ser mayor a 1MB");
       setIsLoading(false);
       return;
     }
@@ -70,7 +65,14 @@ export const CreateAthleteForm = () => {
     try {
       await createAthlete(formData);
       navigate("/users");
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response?.status === 409) {
+        setErrorMessage("Este deportista ya está creado.");
+        setTimeout(() => setErrorMessage(null), 3000);
+      } else {
+        setErrorMessage("Ocurrió un error al registrar el deportista. Intente de nuevo.");
+        setTimeout(() => setErrorMessage(null), 3000);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -83,9 +85,7 @@ export const CreateAthleteForm = () => {
 
   return (
     <Form handleSubmit={handleSubmit} className="form">
-      <h2 className="title" id="title">
-        ALMIGHTY PLANNY
-      </h2>
+      <h2 className="title" id="title">ALMIGHTY PLANNY</h2>
 
       <div className="containerInput">
         <label htmlFor="nombre">Nombre completo del deportista:</label>
@@ -93,70 +93,61 @@ export const CreateAthleteForm = () => {
       </div>
 
       <div className="containerInput">
-        <label>Selecciona tipo de documento:</label>
-        <select name="documento" id="documentType" required>
-          <option value="documento">Tarjeta de identidad</option>
-          <option value="documento">Cedula de ciudadania</option>
-          <option value="documento">Registro Civil</option>
-          <option value="documento">Pasaporte</option>
-        </select>
+  <label>Selecciona tipo de documento:</label>
+  <select name="documento" id="documentType" required onChange={handleDocumentTypeChange}>
+    <option value="" disabled selected hidden>Seleccione un documento</option>
+    <option value="TI">Tarjeta de identidad</option>
+    <option value="CC">Cédula de ciudadanía</option>
+    <option value="RC">Registro Civil</option>
+    <option value="PA">Pasaporte</option>
+  </select>
+</div>
+
+      <div className="containerInput">
+        <label htmlFor="documentNumber">Número de documento:</label>
+        <input type="text" id="documentNumber" required />
       </div>
 
       <div className="containerInput">
-        <label htmlFor="nombre">Numero de documento:</label>
-        <input
-          type="text"
-          id="documentNumber"
-          name="Nombre del club"
-          required
-        />
+        <label htmlFor="email">Correo electrónico:</label>
+        <input type="email" id="email" required />
       </div>
 
       <div className="containerInput">
-        <label htmlFor="nombre">Correo electronico:</label>
-        <input type="email" id="email" name="Correo electronico" required />
-      </div>
-
-      <div className="containerInput">
-        <label htmlFor="fecha">Fecha de nacimiento:</label>
-        <input
-          type="date"
-          id="birthDate"
-          name="fecha"
-          min="1964-01-01"
-          max="2019-01-01"
-          required
-        />
+        <label htmlFor="birthDate">Fecha de nacimiento:</label>
+        <input type="date" id="birthDate" min="1964-01-01" max="2019-01-01" required />
       </div>
 
       <h4>Cargue sus documentos</h4>
 
       <div className="containerInput">
         <label>Documento de identidad</label>
-        <input type="file" name="archivo" id="documentFile" required />
+        <input type="file" id="documentFile" required />
       </div>
 
       <div className="containerInput">
         <label>Certificado de EPS</label>
-        <input type="file" name="archivo" id="documentEPS" required />
+        <input type="file" id="documentEPS" required />
       </div>
 
-      <div className="containerInput">
-        <label htmlFor="nombre">Nombre completo del acudiente en caso de ser menor de edad:</label>
-        <input type="text" id="guardianName" name="Nombre acudiente" required />
-      </div>
+      {showGuardianFields && (
+        <>
+          <div className="containerInput">
+            <label htmlFor="guardianName">Nombre completo del acudiente:</label>
+            <input type="text" id="guardianName" required />
+          </div>
 
-      <div className="containerInput">
-        <label htmlFor="nombre">Numero contacto del acudiente:</label>
-        <input
-          type="text"
-          id="contactNumberl"
-          name="Numero documento del acudiente"
-          required
-        />
-      </div>
+          <div className="containerInput">
+            <label htmlFor="contactNumber">Número de contacto del acudiente:</label>
+            <input type="text" id="contactNumber" required />
+          </div>
+        </>
+      )}
 
-      <Button isLoading={isLoading} label="Registrarse" />
+      <div className="button-container">
+        {errorMessage && <div className="floating-message">{errorMessage}</div>}
+        <Button isLoading={isLoading} label="Registrarse" />
+      </div>
     </Form>
   );
 };

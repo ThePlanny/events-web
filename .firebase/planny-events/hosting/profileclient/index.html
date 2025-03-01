@@ -1,0 +1,29 @@
+<!DOCTYPE html><style>.profile-form[data-astro-cid-aseowsjd]{max-width:800px;margin:0 auto;padding:20px;background:#f8f9fa;border-radius:8px;box-shadow:0 4px 6px #0000001a;font-family:Arial,sans-serif;text-align:center;position:relative}.form-group[data-astro-cid-aseowsjd]{margin-bottom:15px;text-align:left}.form-group[data-astro-cid-aseowsjd] label[data-astro-cid-aseowsjd]{display:block;font-weight:700;margin-bottom:5px}.form-group[data-astro-cid-aseowsjd] input[data-astro-cid-aseowsjd],.form-group[data-astro-cid-aseowsjd] textarea[data-astro-cid-aseowsjd]{width:100%;padding:10px;border:1px solid #ccc;border-radius:4px}.form-group[data-astro-cid-aseowsjd] input[data-astro-cid-aseowsjd][type=file]{border:none}.profile-picture[data-astro-cid-aseowsjd]{width:150px;height:150px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);object-fit:cover;display:block;margin:0 auto 15px;border:2px solid #ea0000}.edit-button[data-astro-cid-aseowsjd]{background:#de3c3c;border:none;cursor:pointer;font-size:18px;color:#fff;border-radius:4px;padding:2px 10px;position:absolute;right:20px;bottom:20px}.edit-button[data-astro-cid-aseowsjd]:hover{background:#920101}.hidden[data-astro-cid-aseowsjd]{display:none}.profile-container[data-astro-cid-aseowsjd]{position:relative;display:inline-block}
+</style><div class="profile-form" data-astro-cid-aseowsjd> <div id="profile-view" class="profile-container" data-astro-cid-aseowsjd> <button id="edit-profile" class="edit-button" data-astro-cid-aseowsjd>Editar Perfil</button> <img id="profile-preview" class="profile-picture" src="https://via.placeholder.com/150" alt="Foto del Club" data-astro-cid-aseowsjd> <h3 id="club-name-display" data-astro-cid-aseowsjd>Nombre del Club</h3> <p id="club-description-display" data-astro-cid-aseowsjd>Descripcion del Club</p> <p id="club-location-display" data-astro-cid-aseowsjd>Ubicación</p> </div> <form id="club-profile-form" class="hidden" data-astro-cid-aseowsjd> <div class="form-group" data-astro-cid-aseowsjd> <label for="club-photo" data-astro-cid-aseowsjd>Foto del Club</label> <input type="file" id="club-photo" name="club-photo" accept="image/*" data-astro-cid-aseowsjd> </div> <div class="form-group" data-astro-cid-aseowsjd> <label for="club-name" data-astro-cid-aseowsjd>Nombre del Club</label> <input type="text" id="club-name" name="club-name" required data-astro-cid-aseowsjd> </div> <div class="form-group" data-astro-cid-aseowsjd> <label for="club-description" data-astro-cid-aseowsjd>Descripcion</label> <textarea id="club-description" name="club-description" rows="4" required data-astro-cid-aseowsjd></textarea> </div> <div class="form-group" data-astro-cid-aseowsjd> <label for="club-location" data-astro-cid-aseowsjd>Ubicacion</label> <input type="text" id="club-location" name="club-location" required data-astro-cid-aseowsjd> </div> <div class="form-group" data-astro-cid-aseowsjd> <button type="submit" data-astro-cid-aseowsjd>Guardar Perfil</button> </div> </form> </div> <script>
+  document.getElementById('club-photo').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('profile-preview').src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('club-profile-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    document.getElementById('club-name-display').innerText = document.getElementById('club-name').value;
+    document.getElementById('club-description-display').innerText = document.getElementById('club-description').value;
+    document.getElementById('club-location-display').innerText = document.getElementById('club-location').value;
+    
+    document.getElementById('profile-view').classList.remove('hidden');
+    document.getElementById('club-profile-form').classList.add('hidden');
+  });
+
+  document.getElementById('edit-profile').addEventListener('click', function() {
+    document.getElementById('profile-view').classList.add('hidden');
+    document.getElementById('club-profile-form').classList.remove('hidden');
+  });
+</script>
