@@ -1,7 +1,6 @@
 import { getToken } from "../authentication/validateAuth";
-import axios from "axios"
+import axios from "axios";
 
-// Interfaces
 import type { Athlete } from "../interfaces/athlete";
 
 export class AthleteService {
@@ -14,12 +13,10 @@ export class AthleteService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        
       }
     );
 
-
-    const data = await response.data;
+    const data = response.data;
 
     return {
       birthDate: data.birthDate,
@@ -55,6 +52,26 @@ export class AthleteService {
       fullName: athlete.fullName,
       id: athlete.id,
     }));
+  }
+
+  async getlink(){
+    const token = await getToken();
+    const response = await fetch(
+      "https://planny-432016.uc.r.appspot.com/api/athletes/link",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+      }
+    );
+
+    if (!response.ok) throw new Error("Error fetching athlete links");
+
+    const data = await response.json();
+
+    return data.result.token
+
   }
 
   async deleteAthlete(id: string): Promise<void> {

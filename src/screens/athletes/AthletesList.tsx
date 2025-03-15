@@ -15,21 +15,35 @@ import { AthleteService } from "../../services/athlete";
 export const AthletesList = () => {
   const [athletes, setAthletes] = useState<Athlete[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [token, setToken] = useState<string>("");
 
-  const getAthletes = async () => {
-    try {
-      const athleteService = new AthleteService();
-      const data: Athlete[] = await athleteService.getAllAthletes();
-      setAthletes(data);
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const athleteService = new AthleteService();
 
+  // Obtener atletas al cargar el componente
   useEffect(() => {
+    const getAthletes = async () => {
+      try {
+        const data: Athlete[] = await athleteService.getAllAthletes();
+        setAthletes(data);
+      } catch (error) {
+        console.error("Error al obtener atletas:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     getAthletes();
   }, []);
+
+  // Función para obtener el token del link de registro
+  async function handleClick() {
+    try {
+      const newToken = await athleteService.getlink();
+      setToken(newToken);
+      console.log("Token recibido:", newToken);
+    } catch (error) {
+      console.error("Error al obtener el token:", error);
+    }
+  }
 
   if (isLoading) {
     return (
@@ -55,6 +69,12 @@ export const AthletesList = () => {
         <Button label="Agregar deportista" href="/createUser" />
       </header>
       <ul className={styles.container}>
+        {/* Botón para obtener el link de registro */}
+        <div className="registrationLink">
+          <button onClick={handleClick}>Link registro</button>
+          {token && <p>Token: {token}</p>}
+        </div>
+
         {athletes.map((athlete) => (
           <AthleteListItem athlete={athlete} key={athlete.id} />
         ))}

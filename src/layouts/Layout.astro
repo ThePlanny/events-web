@@ -19,20 +19,20 @@ const { title } = Astro.props;
   <body>
     <header class="header">
       <div class="logo">
-        <h1>PLANNY</h1>
+        <picture class="portada-container">
+          <img class="logo-img" src="/images/LogoFederacion.png" alt="Portada evento" />
+        </picture>
+        <h1>A - Alpha / Registro Único Fedecolcheer</h1>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/events/my-events">mis eventos</a></li>
-          <li><a href="/events/firstEvent">evento</a></li>
-          <li><a href="/profileclient">Perfil</a></li> <!--Falta agregar la dirccion del perfil -->
+          <!--<li><a href="/events/my-events">mis eventos</a></li>
+          <li><a href="/events/firstEvent">evento</a></li>-->
+          <li><a href="/profileclient">Perfil</a></li> <!--Falta agregar la dirección del perfil -->
           <li><a href="/users">deportistas</a></li>
           <li><a id="btn-logout">cerrar sesión</a></li>
         </ul>
       </nav>
-      <!-- <button class="nav-toggle" aria-label="Abrir menú">
-        <span class="hamburger"></span>
-      </button> -->
     </header>
     <div class="contentBody">
       <slot />
@@ -60,8 +60,20 @@ const { title } = Astro.props;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #333;
+    background-color: #555555;
     color: #fff;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    width: 70px; /* Tamaño estándar */
+    height: auto; /* Mantiene la proporción */
+    object-fit: contain; /* Evita distorsión */
+    margin-right: 10px; /* Espacio entre logo y texto */
   }
 
   .logo h1 {
