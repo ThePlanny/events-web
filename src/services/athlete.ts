@@ -5,7 +5,11 @@ import type { Athlete } from "../interfaces/athlete";
 
 export class AthleteService {
   async createAthlete(athlete: FormData): Promise<Athlete> {
-    const token = await getToken();
+    let token = await getToken();
+    if (!token) {
+      const params = new URLSearchParams(window.location.search);
+      token = params.get('token');
+    }
     const response = await axios.post(
       "https://planny-432016.uc.r.appspot.com/api/athletes",
       athlete,
