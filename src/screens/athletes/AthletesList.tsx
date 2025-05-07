@@ -38,7 +38,7 @@ export const AthletesList = () => {
   async function handleClick() {
     try {
       const newToken = await athleteService.getlink();
-      setToken(newToken);
+      setToken("http://localhost:4321/createUserWithLink?token="+ newToken);
       console.log("Token recibido:", newToken);
     } catch (error) {
       console.error("Error al obtener el token:", error);
