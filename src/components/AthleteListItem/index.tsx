@@ -11,11 +11,11 @@ interface AthleteListItemProps {
 }
 
 export const AthleteListItem = ({ athlete }: AthleteListItemProps) => {
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (athlete.id === undefined) return;
     if (!window.confirm("¿Estás seguro de eliminar este deportista?")) return;
     const athleteService = new AthleteService();
-    athleteService.deleteAthlete(athlete.id);
+    await athleteService.deleteAthlete(athlete.id);
     window.location.reload();
   };
 
