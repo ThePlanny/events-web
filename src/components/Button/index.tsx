@@ -7,9 +7,16 @@ interface ButtonProps {
   isLoading?: boolean;
   href?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-export const Button = ({ label, isLoading, href, onClick }: ButtonProps) => {
+export const Button = ({
+  label,
+  isLoading,
+  href,
+  onClick,
+  disabled,
+}: ButtonProps) => {
   const handleClick = () => {
     if (typeof onClick === "function") {
       onClick();
@@ -23,7 +30,7 @@ export const Button = ({ label, isLoading, href, onClick }: ButtonProps) => {
   return (
     <button
       className={styles.button}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
       onClick={handleClick}
     >
       {isLoading ? <Loader /> : label}

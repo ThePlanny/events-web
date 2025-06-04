@@ -1,6 +1,7 @@
 import "./createAthelete.css";
 import { useState, useEffect } from "react";
 import { navigate } from "astro:transitions/client";
+import dataPolicyStyles from "./dataPolicyModal.module.css";
 
 // Interfaces
 import type { Athlete } from "../../interfaces/athlete";
@@ -18,20 +19,22 @@ export const CreateAthleteForm = () => {
   const [showGuardianFields, setShowGuardianFields] = useState<boolean>(false);
   const [showPolicyPopup, setShowPolicyPopup] = useState<boolean>(false);
   const [policyAccepted, setPolicyAccepted] = useState<boolean>(false);
+  const [policyCheckbox, setPolicyCheckbox] = useState<boolean>(false);
+  const [pendingSubmit, setPendingSubmit] = useState<boolean>(false);
 
+  // Eliminar uso de localStorage para policyAccepted
   useEffect(() => {
-    const accepted = localStorage.getItem("policyAccepted");
-    if (accepted === "true") {
-      setPolicyAccepted(true);
-    } else {
-      setShowPolicyPopup(true);
-    }
+    setPolicyAccepted(false);
+    setShowPolicyPopup(false);
   }, []);
 
   const acceptPolicy = () => {
-    localStorage.setItem("policyAccepted", "true");
     setPolicyAccepted(true);
     setShowPolicyPopup(false);
+    if (pendingSubmit) {
+      setPendingSubmit(false);
+      handleSubmit();
+    }
   };
 
   const handleDocumentTypeChange = (
@@ -41,24 +44,53 @@ export const CreateAthleteForm = () => {
     setShowGuardianFields(selectedType === "TI" || selectedType === "RC");
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    // Validar que todos los campos requeridos estén llenos
+    const fullName = (document.getElementById("nombre") as HTMLInputElement)
+      ?.value;
+    const documentNumber = (
+      document.getElementById("documentNumber") as HTMLInputElement
+    )?.value;
+    const documentType = (
+      document.getElementById("documentType") as HTMLSelectElement
+    )?.value;
+    const birthDate = (document.getElementById("birthDate") as HTMLInputElement)
+      ?.value;
+    const email = (document.getElementById("email") as HTMLInputElement)?.value;
+    const documentFile = (document.getElementById("documentFile") as any)
+      ?.files?.[0];
+    const documentEPS = (document.getElementById("documentEPS") as any)
+      ?.files?.[0];
+    const guardianName = showGuardianFields
+      ? (document.getElementById("guardianName") as HTMLInputElement)?.value
+      : "";
+    const contactNumber = showGuardianFields
+      ? (document.getElementById("contactNumber") as HTMLInputElement)?.value
+      : "";
+
+    if (
+      !fullName ||
+      !documentNumber ||
+      !documentType ||
+      !birthDate ||
+      !email ||
+      !documentFile ||
+      !documentEPS ||
+      (showGuardianFields && (!guardianName || !contactNumber))
+    ) {
+      setErrorMessage("Por favor complete todos los campos obligatorios.");
+      return;
+    }
+
     if (!policyAccepted) {
-      alert("Debe aceptar la Política de Tratamiento de Datos Personales para continuar.");
+      setShowPolicyPopup(true);
+      setPendingSubmit(true);
       return;
     }
 
     setIsLoading(true);
     setErrorMessage(null);
-
-    const fullName = (document.getElementById("nombre") as HTMLInputElement).value;
-    const documentNumber = (document.getElementById("documentNumber") as HTMLInputElement).value;
-    const documentType = (document.getElementById("documentType") as HTMLSelectElement).value;
-    const birthDate = (document.getElementById("birthDate") as HTMLInputElement).value;
-    const email = (document.getElementById("email") as HTMLInputElement).value;
-    const documentFile = (document.getElementById("documentFile") as any).files[0];
-    const documentEPS = (document.getElementById("documentEPS") as any).files[0];
-    const guardianName = showGuardianFields ? (document.getElementById("guardianName") as HTMLInputElement).value : "";
-    const contactNumber = showGuardianFields ? (document.getElementById("contactNumber") as HTMLInputElement).value : "";
 
     if (documentFile.size > 1000000 || documentEPS.size > 1000000) {
       alert("El tamaño de los archivos no puede ser mayor a 1MB");
@@ -94,7 +126,9 @@ export const CreateAthleteForm = () => {
         setErrorMessage("Este deportista ya está creado.");
         setTimeout(() => setErrorMessage(null), 3000);
       } else {
-        setErrorMessage("Ocurrió un error al registrar el deportista. Intente de nuevo.");
+        setErrorMessage(
+          "Ocurrió un error al registrar el deportista. Intente de nuevo."
+        );
         setTimeout(() => setErrorMessage(null), 3000);
       }
     } finally {
@@ -110,12 +144,64 @@ export const CreateAthleteForm = () => {
   return (
     <>
       {showPolicyPopup && (
-        <div className="popup-overlay">
-          <div className="popup-content">
+        <div className={dataPolicyStyles["data-policy-modal-overlay"]}>
+          <div className={dataPolicyStyles["data-policy-modal-content"]}>
+            <button
+              className={dataPolicyStyles["data-policy-close-btn"]}
+              onClick={() => setShowPolicyPopup(false)}
+              title="Cerrar"
+            >
+              ×
+            </button>
             <h2>Política de Tratamiento de Datos Personales</h2>
-            <p>Al registrarse, usted autoriza el tratamiento de los siguientes datos personales: nombre completo, documento de identidad, correo electrónico, número de contacto, fecha de nacimiento, documentos adjuntos, etc. Estos datos serán utilizados para la gestión administrativa, participación en eventos, y cumplimiento de obligaciones legales.</p>
-            <p>Para más información consulte nuestra Política completa.</p>
-            <button onClick={acceptPolicy}>Acepto</button>
+            <div className={dataPolicyStyles["data-policy-scroll"]}>
+              <p>
+                Al registrarse, usted autoriza el tratamiento de los siguientes
+                datos personales: nombre completo, documento de identidad,
+                correo electrónico, número de contacto, fecha de nacimiento,
+                documentos adjuntos, etc. Estos datos serán utilizados para la
+                gestión administrativa, participación en eventos, y cumplimiento
+                de obligaciones legales.
+              </p>
+              <p>
+                Sus datos serán tratados conforme a la Ley 1581 de 2012 y el
+                Decreto 1377 de 2013. Usted tiene derecho a conocer, actualizar,
+                rectificar y suprimir sus datos personales, así como a revocar
+                la autorización otorgada.
+              </p>
+              <p>
+                Para más información consulte nuestra{" "}
+                <a
+                  href="/ruta-a-politica-completa.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Política completa aquí
+                </a>
+                .
+              </p>
+              <div
+                className={dataPolicyStyles["data-policy-checkbox-container"]}
+              >
+                <input
+                  type="checkbox"
+                  id="policyCheckbox"
+                  checked={policyCheckbox}
+                  onChange={(e) => setPolicyCheckbox(e.target.checked)}
+                />
+                <label htmlFor="policyCheckbox">
+                  He leído y acepto la Política de Tratamiento de Datos
+                  Personales
+                </label>
+              </div>
+            </div>
+            <button
+              className={dataPolicyStyles["data-policy-accept-btn"]}
+              onClick={acceptPolicy}
+              disabled={!policyCheckbox}
+            >
+              Acepto
+            </button>
           </div>
         </div>
       )}
@@ -132,7 +218,12 @@ export const CreateAthleteForm = () => {
 
         <div className="containerInput">
           <label>Selecciona tipo de documento:</label>
-          <select name="documento" id="documentType" required onChange={handleDocumentTypeChange}>
+          <select
+            name="documento"
+            id="documentType"
+            required
+            onChange={handleDocumentTypeChange}
+          >
             <option value="" disabled selected hidden>
               Seleccione un documento
             </option>
@@ -155,7 +246,13 @@ export const CreateAthleteForm = () => {
 
         <div className="containerInput">
           <label htmlFor="birthDate">Fecha de nacimiento:</label>
-          <input type="date" id="birthDate" min="1964-01-01" max="2019-01-01" required />
+          <input
+            type="date"
+            id="birthDate"
+            min="1964-01-01"
+            max="2019-01-01"
+            required
+          />
         </div>
 
         <h4>Cargue sus documentos</h4>
@@ -173,20 +270,30 @@ export const CreateAthleteForm = () => {
         {showGuardianFields && (
           <>
             <div className="containerInput">
-              <label htmlFor="guardianName">Nombre completo del acudiente:</label>
+              <label htmlFor="guardianName">
+                Nombre completo del acudiente:
+              </label>
               <input type="text" id="guardianName" required />
             </div>
 
             <div className="containerInput">
-              <label htmlFor="contactNumber">Número de contacto del acudiente:</label>
+              <label htmlFor="contactNumber">
+                Número de contacto del acudiente:
+              </label>
               <input type="text" id="contactNumber" required />
             </div>
           </>
         )}
 
         <div className="button-container">
-          {errorMessage && <div className="floating-message">{errorMessage}</div>}
-          <Button isLoading={isLoading} label="Registrarse" />
+          {errorMessage && (
+            <div className="floating-message">{errorMessage}</div>
+          )}
+          <Button
+            isLoading={isLoading}
+            label="Registrarse"
+            onClick={handleSubmit}
+          />
         </div>
       </Form>
     </>

@@ -1,0 +1,78 @@
+/* Estilos mejorados para el popup de política de datos personales */
+.enhanced-policy-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.enhanced-policy-content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 32px 24px 24px 24px;
+  max-width: 420px;
+  width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.policy-scroll {
+  overflow-y: auto;
+  max-height: 260px;
+  margin-bottom: 18px;
+  padding-right: 6px;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+
+.policy-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.policy-checkbox-container label {
+  font-size: 14px;
+  color: #222;
+  cursor: pointer;
+}
+
+.accept-policy-btn {
+  margin-top: 18px;
+  background: #1e88e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.accept-policy-btn:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .enhanced-policy-content {
+    padding: 18px 6vw 18px 6vw;
+    max-width: 98vw;
+  }
+  .policy-scroll {
+    max-height: 40vh;
+    font-size: 14px;
+  }
+}
