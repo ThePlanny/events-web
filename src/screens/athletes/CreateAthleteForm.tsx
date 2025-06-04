@@ -3,13 +3,10 @@ import { useState, useEffect } from "react";
 import { navigate } from "astro:transitions/client";
 import dataPolicyStyles from "./dataPolicyModal.module.css";
 
-// Interfaces
 import type { Athlete } from "../../interfaces/athlete";
 
-// Services
 import { AthleteService } from "../../services/athlete";
 
-// Components
 import { Form } from "../../components/Form";
 import { Button } from "../../components/Button";
 
@@ -22,7 +19,6 @@ export const CreateAthleteForm = () => {
   const [policyCheckbox, setPolicyCheckbox] = useState<boolean>(false);
   const [pendingSubmit, setPendingSubmit] = useState<boolean>(false);
 
-  // Eliminar uso de localStorage para policyAccepted
   useEffect(() => {
     setPolicyAccepted(false);
     setShowPolicyPopup(false);
@@ -46,22 +42,15 @@ export const CreateAthleteForm = () => {
 
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    // Validar que todos los campos requeridos estén llenos
-    const fullName = (document.getElementById("nombre") as HTMLInputElement)
-      ?.value;
-    const documentNumber = (
-      document.getElementById("documentNumber") as HTMLInputElement
-    )?.value;
-    const documentType = (
-      document.getElementById("documentType") as HTMLSelectElement
-    )?.value;
-    const birthDate = (document.getElementById("birthDate") as HTMLInputElement)
-      ?.value;
+
+    const fullName = (document.getElementById("nombre") as HTMLInputElement)?.value;
+    const documentNumber = (document.getElementById("documentNumber") as HTMLInputElement)?.value;
+    const documentType = (document.getElementById("documentType") as HTMLSelectElement)?.value;
+    const birthDate = (document.getElementById("birthDate") as HTMLInputElement)?.value;
     const email = (document.getElementById("email") as HTMLInputElement)?.value;
-    const documentFile = (document.getElementById("documentFile") as any)
-      ?.files?.[0];
-    const documentEPS = (document.getElementById("documentEPS") as any)
-      ?.files?.[0];
+    const documentFile = (document.getElementById("documentFile") as any)?.files?.[0];
+    const documentEPS = (document.getElementById("documentEPS") as any)?.files?.[0];
+    const athletePhoto = (document.getElementById("athletePhoto") as any)?.files?.[0];
     const guardianName = showGuardianFields
       ? (document.getElementById("guardianName") as HTMLInputElement)?.value
       : "";
@@ -77,6 +66,7 @@ export const CreateAthleteForm = () => {
       !email ||
       !documentFile ||
       !documentEPS ||
+      !athletePhoto ||
       (showGuardianFields && (!guardianName || !contactNumber))
     ) {
       setErrorMessage("Por favor complete todos los campos obligatorios.");
@@ -89,14 +79,17 @@ export const CreateAthleteForm = () => {
       return;
     }
 
-    setIsLoading(true);
-    setErrorMessage(null);
-
-    if (documentFile.size > 1000000 || documentEPS.size > 1000000) {
+    if (
+      documentFile.size > 1000000 ||
+      documentEPS.size > 1000000 ||
+      athletePhoto.size > 1000000
+    ) {
       alert("El tamaño de los archivos no puede ser mayor a 1MB");
-      setIsLoading(false);
       return;
     }
+
+    setIsLoading(true);
+    setErrorMessage(null);
 
     const params: Athlete = {
       fullName,
@@ -107,9 +100,11 @@ export const CreateAthleteForm = () => {
       guardianName,
       contactNumber,
     };
+
     const formData = new FormData();
     formData.append("documentFile", documentFile);
     formData.append("documentEPS", documentEPS);
+    formData.append("athletePhoto", athletePhoto);
     formData.append("fullName", params.fullName);
     formData.append("birthDate", params.birthDate);
     formData.append("documentNumber", params.documentNumber);
@@ -124,13 +119,10 @@ export const CreateAthleteForm = () => {
     } catch (error: any) {
       if (error.response?.status === 409) {
         setErrorMessage("Este deportista ya está creado.");
-        setTimeout(() => setErrorMessage(null), 3000);
       } else {
-        setErrorMessage(
-          "Ocurrió un error al registrar el deportista. Intente de nuevo."
-        );
-        setTimeout(() => setErrorMessage(null), 3000);
+        setErrorMessage("Ocurrió un error al registrar el deportista. Intente de nuevo.");
       }
+      setTimeout(() => setErrorMessage(null), 3000);
     } finally {
       setIsLoading(false);
     }
@@ -156,18 +148,12 @@ export const CreateAthleteForm = () => {
             <h2>Política de Tratamiento de Datos Personales</h2>
             <div className={dataPolicyStyles["data-policy-scroll"]}>
               <p>
-                Al registrarse, usted autoriza el tratamiento de los siguientes
-                datos personales: nombre completo, documento de identidad,
-                correo electrónico, número de contacto, fecha de nacimiento,
-                documentos adjuntos, etc. Estos datos serán utilizados para la
-                gestión administrativa, participación en eventos, y cumplimiento
-                de obligaciones legales.
+                Al registrarse, usted autoriza el tratamiento de los siguientes datos personales:
+                nombre completo, documento de identidad, correo electrónico, número de contacto,
+                fecha de nacimiento, documentos adjuntos, etc.
               </p>
               <p>
-                Sus datos serán tratados conforme a la Ley 1581 de 2012 y el
-                Decreto 1377 de 2013. Usted tiene derecho a conocer, actualizar,
-                rectificar y suprimir sus datos personales, así como a revocar
-                la autorización otorgada.
+                Sus datos serán tratados conforme a la Ley 1581 de 2012 y el Decreto 1377 de 2013.
               </p>
               <p>
                 Para más información consulte nuestra{" "}
@@ -177,12 +163,9 @@ export const CreateAthleteForm = () => {
                   rel="noopener noreferrer"
                 >
                   Política completa aquí
-                </a>
-                .
+                </a>.
               </p>
-              <div
-                className={dataPolicyStyles["data-policy-checkbox-container"]}
-              >
+              <div className={dataPolicyStyles["data-policy-checkbox-container"]}>
                 <input
                   type="checkbox"
                   id="policyCheckbox"
@@ -190,8 +173,7 @@ export const CreateAthleteForm = () => {
                   onChange={(e) => setPolicyCheckbox(e.target.checked)}
                 />
                 <label htmlFor="policyCheckbox">
-                  He leído y acepto la Política de Tratamiento de Datos
-                  Personales
+                  He leído y acepto la Política de Tratamiento de Datos Personales
                 </label>
               </div>
             </div>
@@ -207,9 +189,7 @@ export const CreateAthleteForm = () => {
       )}
 
       <Form handleSubmit={handleSubmit} className="form">
-        <h2 className="title" id="title">
-          ALMIGHTY PLANNY
-        </h2>
+        <h2 className="title" id="title">ALMIGHTY PLANNY</h2>
 
         <div className="containerInput">
           <label htmlFor="nombre">Nombre completo del deportista:</label>
@@ -218,15 +198,8 @@ export const CreateAthleteForm = () => {
 
         <div className="containerInput">
           <label>Selecciona tipo de documento:</label>
-          <select
-            name="documento"
-            id="documentType"
-            required
-            onChange={handleDocumentTypeChange}
-          >
-            <option value="" disabled selected hidden>
-              Seleccione un documento
-            </option>
+          <select id="documentType" required onChange={handleDocumentTypeChange}>
+            <option value="" disabled selected hidden>Seleccione un documento</option>
             <option value="TI">Tarjeta de identidad</option>
             <option value="CC">Cédula de ciudadanía</option>
             <option value="RC">Registro Civil</option>
@@ -246,13 +219,7 @@ export const CreateAthleteForm = () => {
 
         <div className="containerInput">
           <label htmlFor="birthDate">Fecha de nacimiento:</label>
-          <input
-            type="date"
-            id="birthDate"
-            min="1964-01-01"
-            max="2019-01-01"
-            required
-          />
+          <input type="date" id="birthDate" min="1964-01-01" max="2019-01-01" required />
         </div>
 
         <h4>Cargue sus documentos</h4>
@@ -267,19 +234,20 @@ export const CreateAthleteForm = () => {
           <input type="file" id="documentEPS" required />
         </div>
 
+        <div className="containerInput">
+          <label>Foto del deportista</label>
+          <input type="file" id="athletePhoto" accept="image/*" required />
+        </div>
+
         {showGuardianFields && (
           <>
             <div className="containerInput">
-              <label htmlFor="guardianName">
-                Nombre completo del acudiente:
-              </label>
+              <label htmlFor="guardianName">Nombre completo del acudiente:</label>
               <input type="text" id="guardianName" required />
             </div>
 
             <div className="containerInput">
-              <label htmlFor="contactNumber">
-                Número de contacto del acudiente:
-              </label>
+              <label htmlFor="contactNumber">Número de contacto del acudiente:</label>
               <input type="text" id="contactNumber" required />
             </div>
           </>
@@ -289,11 +257,7 @@ export const CreateAthleteForm = () => {
           {errorMessage && (
             <div className="floating-message">{errorMessage}</div>
           )}
-          <Button
-            isLoading={isLoading}
-            label="Registrarse"
-            onClick={handleSubmit}
-          />
+          <Button isLoading={isLoading} label="Registrarse" onClick={handleSubmit} />
         </div>
       </Form>
     </>
